@@ -1,0 +1,6 @@
+{
+  "name": "ProcessServerSolutions",
+  "description": "Cloud legal process serving SaaS platform powered by Cloud SQL PostgreSQL database, user authentication, live service order dispatch, field attempt logging, and real-time alerts.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

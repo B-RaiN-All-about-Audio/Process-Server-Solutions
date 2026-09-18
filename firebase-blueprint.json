@@ -1,0 +1,79 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Registered SaaS user account information, profile, and organization details",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Auth UID" },
+        "email": { "type": "string", "format": "email", "description": "User email address" },
+        "fullName": { "type": "string", "description": "Full legal name or contact name" },
+        "role": { "type": "string", "enum": ["client", "process_server"], "description": "Account role" },
+        "organizationName": { "type": "string", "description": "Law firm name or Process serving agency" },
+        "phone": { "type": "string", "description": "Contact phone number" },
+        "badgeNumber": { "type": "string", "description": "Server badge or license number if server" },
+        "coverageArea": { "type": "string", "description": "Service area or county" },
+        "subscriptionPlan": { "type": "string", "enum": ["starter", "professional", "enterprise"], "description": "SaaS subscription tier" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of registration" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp of profile update" }
+      },
+      "required": ["userId", "email", "fullName", "role", "organizationName", "createdAt"]
+    },
+    "ServiceOrder": {
+      "title": "ServiceOrder",
+      "description": "Legal service of process order details and court documents",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique order ID" },
+        "creatorUid": { "type": "string", "description": "UID of the client who created the order" },
+        "caseNumber": { "type": "string", "description": "Court case number" },
+        "courtName": { "type": "string", "description": "Judicial district or court name" },
+        "plaintiff": { "type": "string", "description": "Plaintiff party" },
+        "defendant": { "type": "string", "description": "Defendant party" },
+        "recipientName": { "type": "string", "description": "Target party to be served" },
+        "serviceAddress": { "type": "string", "description": "Physical address for service" },
+        "priority": { "type": "string", "enum": ["routine", "rush", "same_day"], "description": "Urgency tier" },
+        "status": { "type": "string", "enum": ["draft", "assigned", "in_progress", "served", "non_served"], "description": "Current service status" },
+        "clientName": { "type": "string", "description": "Requesting attorney or client" },
+        "clientFirm": { "type": "string", "description": "Requesting law firm" },
+        "clientEmail": { "type": "string", "description": "Client notification email" },
+        "assignedServerName": { "type": "string", "description": "Assigned process server" },
+        "deadlineDate": { "type": "string", "description": "Service deadline" },
+        "createdAt": { "type": "string", "description": "Order creation timestamp" },
+        "updatedAt": { "type": "string", "description": "Last update timestamp" }
+      },
+      "required": ["id", "caseNumber", "courtName", "recipientName", "serviceAddress", "priority", "status", "createdAt"]
+    },
+    "AppNotification": {
+      "title": "AppNotification",
+      "description": "User notification alert for order status changes and field attempts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique notification ID" },
+        "orderId": { "type": "string", "description": "Associated service order ID" },
+        "caseNumber": { "type": "string", "description": "Case number reference" },
+        "title": { "type": "string", "description": "Alert title" },
+        "message": { "type": "string", "description": "Detailed update message" },
+        "channel": { "type": "string", "enum": ["push", "email", "in_app"], "description": "Delivery channel" },
+        "priority": { "type": "string", "enum": ["info", "success", "warning", "urgent"], "description": "Alert urgency" },
+        "read": { "type": "boolean", "description": "Whether user marked read" },
+        "timestamp": { "type": "string", "description": "Alert timestamp" }
+      },
+      "required": ["id", "orderId", "title", "message", "channel", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "UserProfile" },
+      "description": "Private user account profile and registration details"
+    },
+    "/service_orders/{orderId}": {
+      "schema": { "$ref": "ServiceOrder" },
+      "description": "Active and completed legal service orders"
+    },
+    "/users/{userId}/notifications/{notificationId}": {
+      "schema": { "$ref": "AppNotification" },
+      "description": "User specific real-time alerts and notifications"
+    }
+  }
+}

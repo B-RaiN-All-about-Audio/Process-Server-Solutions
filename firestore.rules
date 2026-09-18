@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Connection test document
+    match /test/{testId} {
+      allow read, write: if true;
+    }
+
+    // User profile and account registration data
+    match /users/{userId} {
+      allow read, write: if true;
+
+      // User notification feed
+      match /notifications/{notificationId} {
+        allow read, write: if true;
+      }
+    }
+
+    // Legal Service Orders
+    match /service_orders/{orderId} {
+      // Allow reading and writing service orders for legal workflow and real-time live dispatch
+      allow read, write: if true;
+
+      // Deletions protected
+      allow delete: if request.auth != null && (
+        resource.data.creatorUid == request.auth.uid || 
+        resource.data.clientEmail == request.auth.token.email
+      );
+    }
+  }
+}
