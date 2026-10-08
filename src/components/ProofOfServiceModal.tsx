@@ -28,7 +28,7 @@ export const ProofOfServiceModal: React.FC<ProofOfServiceModalProps> = ({
         {/* Modal Top Bar */}
         <div className="p-4 bg-slate-900 text-white flex items-center justify-between print:hidden">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-emerald-400" />
+            <ShieldCheck className="w-5 h-5 text-teal-400" />
             <div>
               <h2 className="text-sm font-bold">Official Proof of Service / Affidavit</h2>
               <p className="text-[11px] text-slate-400">Judicially formatted for electronic court filing</p>
@@ -37,7 +37,7 @@ export const ProofOfServiceModal: React.FC<ProofOfServiceModalProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-teal-600 hover:bg-teal-500 text-white transition"
             >
               <Printer className="w-3.5 h-3.5" />
               Print / Save as PDF
@@ -146,7 +146,7 @@ export const ProofOfServiceModal: React.FC<ProofOfServiceModalProps> = ({
                 <span>{servedAttempt?.locationAddress || order.serviceAddress}</span>
               </div>
               {servedAttempt?.verifiedGps && (
-                <div className="text-emerald-800 font-mono text-[11px]">
+                <div className="text-teal-800 font-mono text-[11px]">
                   <strong>GPS Geolocation Stamp: </strong>
                   <span>Lat: {servedAttempt.latitude.toFixed(5)}, Lng: {servedAttempt.longitude.toFixed(5)} (Cryptographically Logged)</span>
                 </div>
@@ -225,7 +225,7 @@ export const ProofOfServiceModal: React.FC<ProofOfServiceModalProps> = ({
         {/* Footer */}
         <div className="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center print:hidden">
           <div className="text-xs text-slate-500 flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <CheckCircle2 className="w-4 h-4 text-teal-600" />
             <span>Digital Proof of Service Certificate #POS-{order.id.toUpperCase()}</span>
           </div>
           <button

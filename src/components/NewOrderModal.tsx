@@ -109,7 +109,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
         {/* Header */}
         <div className="p-4 sm:p-5 bg-slate-900 text-white flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-lg bg-blue-600">
+            <div className="p-2 rounded-lg bg-teal-600">
               <FileText className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -143,7 +143,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
                   placeholder="e.g. 26STCV14920"
                   value={caseNumber}
                   onChange={(e) => setCaseNumber(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
                 />
               </div>
 
@@ -154,7 +154,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
                   required
                   value={courtName}
                   onChange={(e) => setCourtName(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
                 />
               </div>
             </div>
@@ -167,7 +167,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
                   placeholder="e.g. Acme Holdings Corp"
                   value={plaintiff}
                   onChange={(e) => setPlaintiff(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
                 />
               </div>
 
@@ -178,7 +178,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
                   placeholder="e.g. John Doe, et al."
                   value={defendant}
                   onChange={(e) => setDefendant(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
                 />
               </div>
             </div>
@@ -199,7 +199,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
                   placeholder="Full legal name of subject"
                   value={recipientName}
                   onChange={(e) => setRecipientName(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
                 />
               </div>
 
@@ -210,7 +210,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
                   placeholder="(310) 555-0199"
                   value={recipientPhone}
                   onChange={(e) => setRecipientPhone(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
                 />
               </div>
             </div>
@@ -223,7 +223,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
                 placeholder="Street address, unit/suite, city, state, zip"
                 value={serviceAddress}
                 onChange={(e) => setServiceAddress(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
               />
             </div>
 
@@ -234,7 +234,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
                 placeholder="Business name, workplace address, or second home"
                 value={alternateAddress}
                 onChange={(e) => setAlternateAddress(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
               />
             </div>
           </div>
@@ -257,7 +257,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
                   onClick={() => setPriority(p.key as ServicePriority)}
                   className={`p-3 rounded-xl border text-left transition ${
                     priority === p.key
-                      ? 'border-blue-600 bg-blue-50/70 text-blue-950 ring-2 ring-blue-500/20 shadow-xs'
+                      ? 'border-teal-600 bg-teal-50/70 text-teal-950 ring-2 ring-teal-500/20 shadow-xs'
                       : 'border-slate-200 hover:border-slate-300 bg-white text-slate-700'
                   }`}
                 >
@@ -284,7 +284,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
                     onClick={() => toggleDoc(doc)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition ${
                       isSelected
-                        ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
+                        ? 'bg-teal-600 text-white border-teal-600 shadow-xs'
                         : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
                     }`}
                   >
@@ -329,7 +329,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
               placeholder="e.g. Gate code #1234, aggressive guard dog on premise, best time morning before 8am..."
               value={specialInstructions}
               onChange={(e) => setSpecialInstructions(e.target.value)}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
             />
           </div>
 
@@ -344,7 +344,7 @@ export const NewOrderModal: React.FC<NewOrderModalProps> = ({
             </button>
             <button
               type="submit"
-              className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 shadow-sm shadow-blue-600/30 transition flex items-center gap-1.5"
+              className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-sm shadow-teal-600/30 transition flex items-center gap-1.5"
             >
               <Send className="w-3.5 h-3.5" />
               Submit Service Order & Dispatch Server

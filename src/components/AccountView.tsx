@@ -38,7 +38,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
       {/* Banner */}
       <div className="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 bg-indigo-500/10 text-indigo-600 rounded-xl border border-indigo-500/20">
+          <div className="p-3 bg-teal-500/10 text-teal-600 rounded-xl border border-teal-500/20">
             <Database className="w-6 h-6" />
           </div>
           <div>
@@ -50,8 +50,8 @@ export const AccountView: React.FC<AccountViewProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-900 border border-emerald-200 text-xs font-bold">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-teal-50 text-teal-900 border border-teal-200 text-xs font-bold">
+            <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
             <span>Cloud SQL & Firestore Active</span>
           </div>
         </div>
@@ -63,7 +63,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
           <div className="lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-xl bg-blue-600 text-white font-bold text-lg flex items-center justify-center shadow-xs">
+                <div className="w-12 h-12 rounded-xl bg-teal-600 text-white font-bold text-lg flex items-center justify-center shadow-xs">
                   {currentUser.fullName.charAt(0)}
                 </div>
                 <div>
@@ -72,12 +72,12 @@ export const AccountView: React.FC<AccountViewProps> = ({
                     <Building2 className="w-3.5 h-3.5 text-slate-400" />
                     <span>{currentUser.organizationName}</span>
                     <span>•</span>
-                    <span className="capitalize font-semibold text-blue-600">{currentUser.role.replace('_', ' ')}</span>
+                    <span className="capitalize font-semibold text-teal-600">{currentUser.role.replace('_', ' ')}</span>
                   </div>
                 </div>
               </div>
 
-              <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-blue-100 text-blue-800 border border-blue-200">
+              <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-teal-100 text-teal-800 border border-teal-200">
                 {currentUser.subscriptionPlan} Tier
               </span>
             </div>
@@ -110,7 +110,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
                 <span className="text-slate-400 font-medium block mb-1">Primary Jurisdiction Coverage</span>
                 <span className="font-semibold text-slate-800 flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-500" />
+                  <MapPin className="w-3.5 h-3.5 text-teal-500" />
                   {currentUser.coverageArea || 'Greater Metropolitan / Countywide'}
                 </span>
               </div>
@@ -137,7 +137,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
           {/* Database & Subscription Card */}
           <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
             <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-              <Database className="w-4 h-4 text-blue-600" />
+              <Database className="w-4 h-4 text-teal-600" />
               <span>SaaS Data Architecture</span>
             </div>
 
@@ -153,22 +153,22 @@ export const AccountView: React.FC<AccountViewProps> = ({
 
               <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200">
                 <span className="text-slate-600">Real-time Stream</span>
-                <span className="font-semibold text-emerald-700 flex items-center gap-1">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                <span className="font-semibold text-teal-700 flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3 text-teal-600" />
                   Firestore Live
                 </span>
               </div>
 
               <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200">
                 <span className="text-slate-600">Tenant Level</span>
-                <span className="font-bold text-blue-700 uppercase">{currentUser.subscriptionPlan}</span>
+                <span className="font-bold text-teal-700 uppercase">{currentUser.subscriptionPlan}</span>
               </div>
             </div>
 
             <div className="pt-2">
               <button
                 onClick={onOpenAuth}
-                className="w-full py-2.5 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-xs transition"
+                className="w-full py-2.5 rounded-xl text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white shadow-xs transition"
               >
                 Manage Subscription Plan
               </button>
@@ -177,7 +177,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
         </div>
       ) : (
         <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-xs text-center max-w-xl mx-auto space-y-4">
-          <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 mx-auto flex items-center justify-center border border-blue-100">
+          <div className="w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 mx-auto flex items-center justify-center border border-teal-100">
             <User className="w-7 h-7" />
           </div>
           <div>
@@ -189,7 +189,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
 
           <button
             onClick={onOpenAuth}
-            className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl shadow-xs transition inline-flex items-center gap-2"
+            className="px-6 py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs rounded-xl shadow-xs transition inline-flex items-center gap-2"
           >
             <User className="w-4 h-4" />
             <span>Open Demo Sign In / Registration</span>
