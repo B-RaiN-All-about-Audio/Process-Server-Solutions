@@ -40,7 +40,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       {/* Banner */}
       <div className="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 bg-blue-500/10 text-blue-600 rounded-xl border border-blue-500/20">
+          <div className="p-3 bg-teal-500/10 text-teal-700 rounded-xl border border-teal-500/20">
             <TrendingUp className="w-6 h-6" />
           </div>
           <div>
@@ -52,10 +52,10 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         </div>
 
         <div className="flex items-center gap-2 text-xs font-semibold">
-          <span className="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-900 border border-blue-200">
+          <span className="px-3 py-1.5 rounded-xl bg-teal-50 text-teal-900 border border-teal-200">
             {total} Active Legal Matters
           </span>
-          <span className="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-900 border border-emerald-200">
+          <span className="px-3 py-1.5 rounded-xl bg-teal-50 text-teal-900 border border-teal-200">
             {successRate}% Success Rate
           </span>
         </div>
@@ -66,7 +66,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500">Service Success</span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <CheckCircle2 className="w-4 h-4 text-teal-500" />
           </div>
           <div className="text-2xl font-bold text-slate-900 mt-2">{successRate}%</div>
           <p className="text-[11px] text-slate-500 mt-1">{served} of {total} matters completed</p>
@@ -93,7 +93,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500">Active Field Pipeline</span>
-            <Clock className="w-4 h-4 text-blue-500" />
+            <Clock className="w-4 h-4 text-teal-500" />
           </div>
           <div className="text-2xl font-bold text-slate-900 mt-2">{inProgress + assigned}</div>
           <p className="text-[11px] text-slate-500 mt-1">{inProgress} in-progress, {assigned} assigned</p>
@@ -114,7 +114,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
               </div>
               <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
                 <div 
-                  className="bg-emerald-500 h-full rounded-full transition-all duration-500"
+                  className="bg-teal-500 h-full rounded-full transition-all duration-500"
                   style={{ width: `${total > 0 ? (served / total) * 100 : 0}%` }}
                 />
               </div>
@@ -127,7 +127,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
               </div>
               <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
                 <div 
-                  className="bg-blue-500 h-full rounded-full transition-all duration-500"
+                  className="bg-teal-500 h-full rounded-full transition-all duration-500"
                   style={{ width: `${total > 0 ? (inProgress / total) * 100 : 0}%` }}
                 />
               </div>
@@ -182,12 +182,12 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
               <span className="text-base font-extrabold text-amber-800">{rush}</span>
             </div>
 
-            <div className="p-3 rounded-xl bg-blue-50/70 border border-blue-200 flex items-center justify-between">
+            <div className="p-3 rounded-xl bg-teal-50/70 border border-teal-200 flex items-center justify-between">
               <div>
-                <div className="text-xs font-bold text-blue-900">Routine Service</div>
-                <div className="text-[11px] text-blue-700">Standard 3-5 day attempt window</div>
+                <div className="text-xs font-bold text-teal-900">Routine Service</div>
+                <div className="text-[11px] text-teal-700">Standard 3-5 day attempt window</div>
               </div>
-              <span className="text-base font-extrabold text-blue-800">{routine}</span>
+              <span className="text-base font-extrabold text-teal-800">{routine}</span>
             </div>
           </div>
         </div>

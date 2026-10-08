@@ -94,7 +94,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="mobile-menu-toggle"
               onClick={onToggleMobileSidebar}
-              className="p-2 -ml-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 lg:hidden focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 -ml-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 lg:hidden focus:outline-none focus:ring-2 focus:ring-teal-500"
               aria-label="Open navigation sidebar"
             >
               <Menu className="w-6 h-6" />
@@ -105,7 +105,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <span>{currentMeta.title}</span>
                 <span className={`hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold border ${
                   currentRole === 'client' 
-                    ? 'bg-blue-50 text-blue-700 border-blue-200'
+                    ? 'bg-teal-50 text-teal-700 border-teal-200'
                     : 'bg-amber-50 text-amber-800 border-amber-200'
                 }`}>
                   {currentRole === 'client' ? (
@@ -134,9 +134,9 @@ export const Header: React.FC<HeaderProps> = ({
               id="header-simulate-btn"
               onClick={onSimulateFieldAction}
               title="Simulate live field attempt"
-              className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 border border-slate-200 transition"
+              className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-teal-600 hover:bg-teal-50 border border-slate-200 transition"
             >
-              <Radio className="w-3.5 h-3.5 text-blue-500 animate-pulse" />
+              <Radio className="w-3.5 h-3.5 text-teal-500 animate-pulse" />
               <span>Simulate Event</span>
             </button>
 
@@ -159,7 +159,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="header-create-order-btn"
               onClick={onOpenNewOrder}
-              className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white shadow-xs transition active:scale-95"
+              className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-teal-600 hover:bg-teal-700 text-white shadow-xs transition active:scale-95"
             >
               <Plus className="w-4 h-4" />
               <span><span className="hidden sm:inline">New </span>Order</span>
@@ -172,7 +172,7 @@ export const Header: React.FC<HeaderProps> = ({
                 title={`Logged in as ${currentUser.fullName} (${currentUser.organizationName})`}
                 className="flex items-center gap-2 p-1 pl-2 rounded-xl hover:bg-slate-100 border border-slate-200 transition"
               >
-                <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center shadow-xs">
+                <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-slate-700 to-teal-600 text-white font-bold text-xs flex items-center justify-center shadow-xs">
                   {currentUser.fullName.charAt(0)}
                 </div>
                 <span className="text-xs font-semibold text-slate-700 hidden sm:inline max-w-[100px] truncate">
@@ -182,7 +182,7 @@ export const Header: React.FC<HeaderProps> = ({
             ) : (
               <button
                 onClick={onOpenAuth}
-                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50 border border-slate-200 transition"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:text-teal-600 hover:bg-teal-50 border border-slate-200 transition"
               >
                 <User className="w-3.5 h-3.5" />
                 <span>Login</span>

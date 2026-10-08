@@ -68,7 +68,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       label: 'Service Orders',
       icon: FileText,
       badge: ordersCount,
-      badgeColor: 'bg-blue-500/20 text-blue-300 border border-blue-500/30',
+      badgeColor: 'bg-teal-500/20 text-teal-300 border border-teal-500/30',
       description: 'Active cases & court summons',
     },
     {
@@ -84,7 +84,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       label: 'Proof of Service',
       icon: ShieldCheck,
       badge: servedCount,
-      badgeColor: 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30',
+      badgeColor: 'bg-teal-500/20 text-teal-300 border border-teal-500/30',
       description: 'Legal affidavits & signatures',
     },
     {
@@ -131,18 +131,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Top Brand Bar */}
         <div className="p-4 border-b border-slate-800/80 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-inner shadow-blue-400/20 shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-700 to-teal-600 flex items-center justify-center shadow-inner shadow-teal-400/20 shrink-0">
               <ShieldCheck className="w-6 h-6 text-white" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="font-bold text-base tracking-tight text-white">
-                  ProcessServer<span className="text-blue-400">Solutions</span>
+                  ProcessServer<span className="text-teal-500">Solutions</span>
                 </span>
               </div>
               <div className="flex items-center gap-1.5 mt-0.5">
-                <span className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded text-[10px] font-medium bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded text-[10px] font-medium bg-teal-500/15 text-teal-500 border border-teal-500/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
                   Live Dispatch
                 </span>
                 <span className="text-[10px] text-slate-400">Cloud SQL DB</span>
@@ -164,7 +164,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="px-4 pt-3 pb-2 border-b border-slate-800/60 shrink-0">
           <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center justify-between">
             <span>Active Perspective</span>
-            <span className="text-[10px] text-blue-400">Toggle View</span>
+            <span className="text-[10px] text-teal-500">Toggle View</span>
           </div>
           <div className="grid grid-cols-2 gap-1.5 p-1 bg-slate-950/60 rounded-xl border border-slate-800">
             <button
@@ -172,7 +172,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => onRoleChange('client')}
               className={`flex flex-col items-center justify-center py-2 px-1 rounded-lg text-xs font-semibold transition ${
                 currentRole === 'client'
-                  ? 'bg-blue-600 text-white shadow-sm'
+                  ? 'bg-teal-600 text-white shadow-sm'
                   : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
               }`}
             >
@@ -209,7 +209,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onOpenNewOrder();
               onCloseMobile();
             }}
-            className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-sm shadow-blue-600/30 transition active:scale-98"
+            className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold bg-gradient-to-r from-slate-700 to-teal-600 hover:from-slate-600 hover:to-teal-500 text-white shadow-sm shadow-teal-600/30 transition active:scale-98"
           >
             <Plus className="w-4 h-4" />
             <span>New Service Order</span>
@@ -236,19 +236,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 }}
                 className={`w-full flex items-center justify-between p-2.5 rounded-xl text-left transition group ${
                   isActive
-                    ? 'bg-blue-600 text-white font-semibold shadow-xs'
+                    ? 'bg-teal-600 text-white font-semibold shadow-xs'
                     : 'text-slate-300 hover:bg-slate-800 hover:text-white'
                 }`}
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className={`p-1.5 rounded-lg transition ${
-                    isActive ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-400 group-hover:text-blue-400'
+                    isActive ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-400 group-hover:text-teal-500'
                   }`}>
                     <Icon className="w-4 h-4" />
                   </div>
                   <div className="truncate">
                     <div className="text-xs font-medium truncate">{item.label}</div>
-                    <div className={`text-[10px] truncate ${isActive ? 'text-blue-100' : 'text-slate-400'}`}>
+                    <div className={`text-[10px] truncate ${isActive ? 'text-teal-100' : 'text-slate-400'}`}>
                       {item.description}
                     </div>
                   </div>
@@ -275,10 +275,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
             className="w-full flex items-center justify-between p-2 rounded-xl text-xs bg-slate-950/60 hover:bg-slate-800/80 text-slate-300 border border-slate-800 transition"
           >
             <div className="flex items-center gap-2">
-              <Radio className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
+              <Radio className="w-3.5 h-3.5 text-teal-500 animate-pulse" />
               <span className="font-medium">Simulate Field Event</span>
             </div>
-            <span className="text-[10px] text-blue-400">Test Feed</span>
+            <span className="text-[10px] text-teal-500">Test Feed</span>
           </button>
         </div>
 
@@ -293,7 +293,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 }}
                 className="flex items-center gap-2.5 min-w-0 text-left hover:opacity-90 transition flex-1"
               >
-                <div className="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-xs shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-teal-600 text-white font-bold flex items-center justify-center text-xs shrink-0">
                   {currentUser.fullName.charAt(0)}
                 </div>
                 <div className="truncate">
@@ -321,7 +321,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 onOpenAuth();
                 onCloseMobile();
               }}
-              className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-blue-400 border border-blue-500/30 transition"
+              className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-teal-500 border border-teal-500/30 transition"
             >
               <User className="w-3.5 h-3.5" />
               <span>Sign In / Demo Login</span>

@@ -54,7 +54,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
         );
       case 'email':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-teal-50 text-teal-700 border border-teal-200">
             <Mail className="w-3 h-3" />
             Email Sent
           </span>
@@ -63,7 +63,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
       default:
         return (
           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
-            <Radio className="w-3 h-3 text-emerald-600" />
+            <Radio className="w-3 h-3 text-teal-600" />
             Web Portal
           </span>
         );
@@ -73,13 +73,13 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
   const getPriorityIcon = (priority: AppNotification['priority']) => {
     switch (priority) {
       case 'success':
-        return <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />;
+        return <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />;
       case 'warning':
       case 'urgent':
         return <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />;
       case 'info':
       default:
-        return <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />;
+        return <ShieldCheck className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />;
     }
   };
 
@@ -90,7 +90,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
         {/* Drawer Header */}
         <div className="p-4 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center gap-2">
-            <Bell className="w-5 h-5 text-blue-400" />
+            <Bell className="w-5 h-5 text-teal-500" />
             <div>
               <h2 className="text-sm font-bold">Live Client & Server Notifications</h2>
               <p className="text-[11px] text-slate-400">Instant updates across Web, Email & Push</p>
@@ -127,7 +127,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
               <button
                 onClick={() => setChannelFilter('email')}
                 className={`px-2 py-1 rounded-md font-medium transition ${
-                  channelFilter === 'email' ? 'bg-blue-700 text-white' : 'text-slate-600 hover:bg-slate-200'
+                  channelFilter === 'email' ? 'bg-teal-700 text-white' : 'text-slate-600 hover:bg-slate-200'
                 }`}
               >
                 Email
@@ -163,7 +163,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
           {/* Quick simulation trigger */}
           <button
             onClick={onTriggerSimulatedNotification}
-            className="w-full py-1.5 px-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition"
+            className="w-full py-1.5 px-3 bg-gradient-to-r from-slate-700 to-teal-600 hover:from-slate-600 hover:to-teal-500 text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition"
           >
             <Zap className="w-3.5 h-3.5 text-amber-300" />
             Simulate New Field Attempt Event
@@ -188,10 +188,10 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
                   onSelectNotification(item.orderId);
                   onClose();
                 }}
-                className={`p-3 rounded-xl border text-xs cursor-pointer transition hover:border-blue-400 hover:shadow-xs space-y-1.5 ${
+                className={`p-3 rounded-xl border text-xs cursor-pointer transition hover:border-teal-400 hover:shadow-xs space-y-1.5 ${
                   item.read
                     ? 'bg-white border-slate-200 text-slate-700'
-                    : 'bg-blue-50/50 border-blue-200 text-slate-900 font-medium ring-1 ring-blue-400/20'
+                    : 'bg-teal-50/50 border-teal-200 text-slate-900 font-medium ring-1 ring-teal-400/20'
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
@@ -201,7 +201,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
                       <div className="flex items-center gap-1.5">
                         <span className="font-bold text-slate-900">{item.title}</span>
                       </div>
-                      <span className="font-mono text-[10px] text-blue-700 font-semibold">
+                      <span className="font-mono text-[10px] text-teal-700 font-semibold">
                         Case #{item.caseNumber}
                       </span>
                     </div>
@@ -215,7 +215,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
 
                 <div className="flex items-center justify-between pl-6 pt-1 text-[10px] text-slate-400">
                   <span>{new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                  <span className="text-blue-600 hover:underline flex items-center gap-0.5">
+                  <span className="text-teal-600 hover:underline flex items-center gap-0.5">
                     Open Case File <ExternalLink className="w-2.5 h-2.5" />
                   </span>
                 </div>
@@ -227,7 +227,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
         {/* Footer info */}
         <div className="p-3 bg-slate-50 border-t border-slate-200 text-[11px] text-slate-500 flex items-center justify-between">
           <span>Push & Email Dispatch Active</span>
-          <span className="text-emerald-700 font-bold">● Connected</span>
+          <span className="text-teal-700 font-bold">● Connected</span>
         </div>
 
       </div>

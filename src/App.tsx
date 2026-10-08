@@ -422,7 +422,7 @@ export const App: React.FC = () => {
   const servedCount = orders.filter((o) => o.status === 'served').length;
 
   return (
-    <div className="min-h-screen bg-slate-100 selection:bg-blue-600 selection:text-white flex flex-col">
+    <div className="min-h-screen bg-slate-100 selection:bg-teal-600 selection:text-white flex flex-col">
       {/* Left Navigation Sidebar with Page Tabs */}
       <Sidebar
         activeTab={activeTab}
@@ -545,7 +545,7 @@ export const App: React.FC = () => {
         <footer className="bg-white border-t border-slate-200 text-slate-500 py-4 text-xs mt-auto">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-blue-600" />
+              <ShieldCheck className="w-4 h-4 text-teal-600" />
               <span className="font-bold text-slate-800">ProcessServerSolutions</span>
               <span className="hidden sm:inline">— Cloud SaaS database management platform with real-time dispatch</span>
             </div>
@@ -553,9 +553,9 @@ export const App: React.FC = () => {
             <div className="flex items-center gap-4 text-xs">
               <button
                 onClick={handleSimulateFieldAction}
-                className="hover:text-blue-600 transition flex items-center gap-1 font-medium"
+                className="hover:text-teal-600 transition flex items-center gap-1 font-medium"
               >
-                <Radio className="w-3.5 h-3.5 text-blue-500 animate-pulse" />
+                <Radio className="w-3.5 h-3.5 text-teal-500 animate-pulse" />
                 Simulate Event
               </button>
               <span>•</span>

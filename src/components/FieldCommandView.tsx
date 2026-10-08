@@ -70,8 +70,8 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
     switch (outcome) {
       case 'personal_service':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-100 text-teal-800 border border-teal-200">
+            <CheckCircle2 className="w-3.5 h-3.5 text-teal-600" />
             Personal Service Executed
           </span>
         );
@@ -91,8 +91,8 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
         );
       case 'resident_not_home':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 border border-blue-200">
-            <Clock className="w-3.5 h-3.5 text-blue-600" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-100 text-teal-800 border border-teal-200">
+            <Clock className="w-3.5 h-3.5 text-teal-600" />
             Not Home (Stakeout)
           </span>
         );
@@ -133,7 +133,7 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
           <span className="px-3 py-1.5 rounded-xl bg-amber-50 text-amber-900 border border-amber-200">
             {allAttemptsWithOrder.length} Total Attempts Logged
           </span>
-          <span className="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-900 border border-emerald-200">
+          <span className="px-3 py-1.5 rounded-xl bg-teal-50 text-teal-900 border border-teal-200">
             100% GPS Geocoded
           </span>
         </div>
@@ -146,7 +146,7 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
             <h3 className="text-sm font-bold text-slate-900">Active Service Route Queue</h3>
             <p className="text-xs text-slate-500">Select any active summons to record an on-scene field attempt</p>
           </div>
-          <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+          <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-200">
             {activeOrdersForService.length} Ready for Serve
           </span>
         </div>
@@ -155,7 +155,7 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
           {activeOrdersForService.map((ord) => (
             <div 
               key={ord.id}
-              className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-blue-400 hover:shadow-xs transition flex flex-col justify-between gap-3"
+              className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-teal-400 hover:shadow-xs transition flex flex-col justify-between gap-3"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-1">
@@ -165,7 +165,7 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
                       ? 'bg-rose-100 text-rose-800 border border-rose-200' 
                       : ord.priority === 'rush' 
                         ? 'bg-amber-100 text-amber-800 border border-amber-200' 
-                        : 'bg-blue-100 text-blue-800 border border-blue-200'
+                        : 'bg-teal-100 text-teal-800 border border-teal-200'
                   }`}>
                     {ord.priority.replace('_', ' ')}
                   </span>
@@ -216,7 +216,7 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search server, address, subject..."
-                className="pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 w-44 sm:w-56"
+                className="pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 w-44 sm:w-56"
               />
             </div>
 
@@ -224,7 +224,7 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
             <select
               value={filterOutcome}
               onChange={(e) => setFilterOutcome(e.target.value)}
-              className="py-1.5 px-2.5 rounded-xl border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="py-1.5 px-2.5 rounded-xl border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
             >
               <option value="all">All Outcomes</option>
               <option value="personal_service">Personal Service</option>
@@ -267,14 +267,14 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
                 {/* Server Info & GPS Location */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-100">
                   <div className="flex items-center gap-2">
-                    <User className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                    <User className="w-3.5 h-3.5 text-teal-500 shrink-0" />
                     <span>
                       Server: <strong className="text-slate-800">{att.serverName}</strong> (Badge #{att.serverBadgeId})
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2 truncate">
-                    <MapPin className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <MapPin className="w-3.5 h-3.5 text-teal-600 shrink-0" />
                     <span className="truncate">
                       GPS Verified: {att.latitude.toFixed(4)}, {att.longitude.toFixed(4)} — {att.locationAddress}
                     </span>
@@ -306,13 +306,13 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
                 <div className="flex items-center justify-between pt-1">
                   <div className="flex items-center gap-3">
                     {att.photoUrl && (
-                      <span className="inline-flex items-center gap-1 text-[11px] text-blue-600 font-medium">
+                      <span className="inline-flex items-center gap-1 text-[11px] text-teal-600 font-medium">
                         <Camera className="w-3.5 h-3.5" />
                         Photographic Evidence Timestamped
                       </span>
                     )}
                     {att.signatureUrl && (
-                      <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 font-medium">
+                      <span className="inline-flex items-center gap-1 text-[11px] text-teal-600 font-medium">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         Digital Handover Signature Captured
                       </span>
@@ -322,14 +322,14 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => onSelectOrder(att.orderRef)}
-                      className="px-3 py-1 rounded-lg text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50 border border-slate-200 transition"
+                      className="px-3 py-1 rounded-lg text-xs font-semibold text-slate-700 hover:text-teal-600 hover:bg-teal-50 border border-slate-200 transition"
                     >
                       Case Details
                     </button>
                     {(att.outcome === 'personal_service' || att.outcome === 'substituted_service') && (
                       <button
                         onClick={() => onViewProof(att.orderRef)}
-                        className="px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs transition"
+                        className="px-3 py-1 rounded-lg text-xs font-semibold bg-teal-600 hover:bg-teal-700 text-white shadow-xs transition"
                       >
                         View Affidavit
                       </button>

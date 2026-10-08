@@ -206,7 +206,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         {/* Header */}
         <div className="p-5 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shadow-inner">
+            <div className="w-10 h-10 rounded-xl bg-teal-600 flex items-center justify-center shadow-inner">
               <Database className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -234,7 +234,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             type="button"
             onClick={() => { setIsSignUp(true); setErrorMsg(null); }}
             className={`py-2 rounded-lg transition ${
-              isSignUp ? 'bg-white text-blue-600 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              isSignUp ? 'bg-white text-teal-600 shadow-xs' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             Sign Up & Save Profile
@@ -243,7 +243,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             type="button"
             onClick={() => { setIsSignUp(false); setErrorMsg(null); }}
             className={`py-2 rounded-lg transition ${
-              !isSignUp ? 'bg-white text-blue-600 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              !isSignUp ? 'bg-white text-teal-600 shadow-xs' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             Existing User Sign In
@@ -251,8 +251,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         </div>
 
         {/* Quick Demo Logins */}
-        <div className="p-4 bg-blue-50/70 border-b border-blue-100 space-y-2">
-          <span className="text-[11px] font-bold text-blue-900 uppercase tracking-wider block">
+        <div className="p-4 bg-teal-50/70 border-b border-teal-100 space-y-2">
+          <span className="text-[11px] font-bold text-teal-900 uppercase tracking-wider block">
             ⚡ Quick Evaluation Sign In (One-Click Firestore Profile)
           </span>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -260,13 +260,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               type="button"
               onClick={() => handleDemoSignIn('client')}
               disabled={loading}
-              className="px-3 py-2 bg-white hover:bg-blue-100/70 text-blue-900 rounded-xl border border-blue-200 text-xs font-bold flex items-center justify-between shadow-2xs transition"
+              className="px-3 py-2 bg-white hover:bg-teal-100/70 text-teal-900 rounded-xl border border-teal-200 text-xs font-bold flex items-center justify-between shadow-2xs transition"
             >
               <div className="flex items-center gap-1.5">
-                <Briefcase className="w-3.5 h-3.5 text-blue-600" />
+                <Briefcase className="w-3.5 h-3.5 text-teal-600" />
                 <span>Sign In as Attorney</span>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-blue-400" />
+              <ArrowRight className="w-3.5 h-3.5 text-teal-500" />
             </button>
             <button
               type="button"
@@ -292,8 +292,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         )}
 
         {successMsg && (
-          <div className="mx-6 mt-4 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+          <div className="mx-6 mt-4 p-3 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 text-xs flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" />
             <span>{successMsg}</span>
           </div>
         )}
@@ -314,12 +314,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     onClick={() => setRole('client')}
                     className={`p-3 rounded-xl border text-left transition ${
                       role === 'client'
-                        ? 'border-blue-600 bg-blue-50/70 ring-2 ring-blue-500/20 text-blue-950'
+                        ? 'border-teal-600 bg-teal-50/70 ring-2 ring-teal-500/20 text-teal-950'
                         : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700'
                     }`}
                   >
                     <div className="font-bold flex items-center gap-1.5">
-                      <Briefcase className="w-3.5 h-3.5 text-blue-600" />
+                      <Briefcase className="w-3.5 h-3.5 text-teal-600" />
                       <span>Law Firm / Client</span>
                     </div>
                     <p className="text-[10px] text-slate-500 mt-1">
@@ -359,7 +359,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     placeholder={role === 'client' ? 'e.g. Rachel Thorne, Esq.' : 'e.g. Marcus Vance'}
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
                   />
                 </div>
 
@@ -373,7 +373,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     placeholder={role === 'client' ? 'e.g. Thorne & Bay Law LLC' : 'e.g. Vanguard Process Servers'}
                     value={organizationName}
                     onChange={(e) => setOrganizationName(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -418,7 +418,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   placeholder="name@organization.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
                 />
               </div>
             </div>
@@ -434,7 +434,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   placeholder="At least 6 characters"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
                 />
               </div>
             </div>
@@ -458,7 +458,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     onClick={() => setPlan(p.id as any)}
                     className={`p-2 rounded-xl border text-center transition ${
                       plan === p.id
-                        ? 'border-blue-600 bg-blue-50 text-blue-900 font-bold'
+                        ? 'border-teal-600 bg-teal-50 text-teal-900 font-bold'
                         : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
                     }`}
                   >
@@ -473,7 +473,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           {/* Submit button */}
           <div className="pt-3 border-t border-slate-200 flex items-center justify-between gap-3">
             <span className="text-[11px] text-slate-500 flex items-center gap-1">
-              <Database className="w-3.5 h-3.5 text-blue-600" />
+              <Database className="w-3.5 h-3.5 text-teal-600" />
               <span>Persisted to Firestore</span>
             </span>
 
@@ -488,7 +488,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <button
                 type="submit"
                 disabled={loading}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 shadow-sm transition disabled:opacity-50"
+                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-sm transition disabled:opacity-50"
               >
                 {loading ? 'Saving to Database...' : isSignUp ? 'Save SaaS Profile' : 'Sign In'}
               </button>

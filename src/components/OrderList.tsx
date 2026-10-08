@@ -94,8 +94,8 @@ export const OrderList: React.FC<OrderListProps> = ({
     switch (status) {
       case 'served':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-teal-50 text-teal-800 border border-teal-200">
+            <CheckCircle2 className="w-3.5 h-3.5 text-teal-600" />
             SERVED & VERIFIED
           </span>
         );
@@ -108,8 +108,8 @@ export const OrderList: React.FC<OrderListProps> = ({
         );
       case 'assigned':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200">
-            <User className="w-3.5 h-3.5 text-blue-600" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-800 border border-teal-200">
+            <User className="w-3.5 h-3.5 text-teal-600" />
             ASSIGNED TO SERVER
           </span>
         );
@@ -144,7 +144,7 @@ export const OrderList: React.FC<OrderListProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by case #, recipient, plaintiff, defendant, address, or server..."
-              className="w-full pl-10 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
+              className="w-full pl-10 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition"
             />
             {searchQuery && (
               <button
@@ -178,7 +178,7 @@ export const OrderList: React.FC<OrderListProps> = ({
               <button
                 id="view-grid-btn"
                 onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded-md transition ${viewMode === 'grid' ? 'bg-white text-blue-600 shadow-xs' : 'text-slate-400 hover:text-slate-700'}`}
+                className={`p-1.5 rounded-md transition ${viewMode === 'grid' ? 'bg-white text-teal-600 shadow-xs' : 'text-slate-400 hover:text-slate-700'}`}
                 title="Grid Cards View"
               >
                 <LayoutGrid className="w-4 h-4" />
@@ -186,7 +186,7 @@ export const OrderList: React.FC<OrderListProps> = ({
               <button
                 id="view-table-btn"
                 onClick={() => setViewMode('table')}
-                className={`p-1.5 rounded-md transition ${viewMode === 'table' ? 'bg-white text-blue-600 shadow-xs' : 'text-slate-400 hover:text-slate-700'}`}
+                className={`p-1.5 rounded-md transition ${viewMode === 'table' ? 'bg-white text-teal-600 shadow-xs' : 'text-slate-400 hover:text-slate-700'}`}
                 title="Table View"
               >
                 <TableIcon className="w-4 h-4" />
@@ -242,7 +242,7 @@ export const OrderList: React.FC<OrderListProps> = ({
               <div
                 key={order.id}
                 id={`order-card-${order.id}`}
-                className="bg-white rounded-xl border border-slate-200 hover:border-blue-300 shadow-xs hover:shadow-md transition flex flex-col justify-between overflow-hidden group"
+                className="bg-white rounded-xl border border-slate-200 hover:border-teal-300 shadow-xs hover:shadow-md transition flex flex-col justify-between overflow-hidden group"
               >
                 {/* Header info */}
                 <div className="p-4 sm:p-5 border-b border-slate-100 space-y-3">
@@ -254,7 +254,7 @@ export const OrderList: React.FC<OrderListProps> = ({
                         </span>
                         {getPriorityBadge(order.priority)}
                       </div>
-                      <h3 className="text-sm font-bold text-slate-900 mt-1 line-clamp-1 group-hover:text-blue-600 transition">
+                      <h3 className="text-sm font-bold text-slate-900 mt-1 line-clamp-1 group-hover:text-teal-600 transition">
                         {order.plaintiff} v. {order.defendant}
                       </h3>
                       <p className="text-xs text-slate-400 line-clamp-1">{order.courtName}</p>
@@ -282,7 +282,7 @@ export const OrderList: React.FC<OrderListProps> = ({
 
                     {order.assignedServerName && (
                       <div className="flex items-center gap-2 text-slate-600">
-                        <ShieldCheck className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                        <ShieldCheck className="w-3.5 h-3.5 text-teal-500 shrink-0" />
                         <span>Process Server: </span>
                         <span className="font-medium text-slate-800">{order.assignedServerName}</span>
                       </div>
@@ -303,7 +303,7 @@ export const OrderList: React.FC<OrderListProps> = ({
                     )}
                   </div>
                   {lastAttempt?.verifiedGps && (
-                    <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-medium text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200">
                       <MapPin className="w-3 h-3" />
                       GPS Stamped
                     </span>
@@ -315,7 +315,7 @@ export const OrderList: React.FC<OrderListProps> = ({
                   <button
                     id={`btn-view-order-${order.id}`}
                     onClick={() => onSelectOrder(order)}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-teal-600 hover:text-teal-800 transition"
                   >
                     View File & History
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -326,7 +326,7 @@ export const OrderList: React.FC<OrderListProps> = ({
                       <button
                         id={`btn-proof-order-${order.id}`}
                         onClick={() => onViewProof(order)}
-                        className="px-2.5 py-1 text-xs font-medium text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition"
+                        className="px-2.5 py-1 text-xs font-medium text-teal-800 bg-teal-50 hover:bg-teal-100 border border-teal-200 rounded-lg transition"
                       >
                         Proof of Service
                       </button>
@@ -404,7 +404,7 @@ export const OrderList: React.FC<OrderListProps> = ({
                         ) : (
                           <button
                             onClick={() => onViewProof(order)}
-                            className="px-2.5 py-1 rounded bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-medium transition"
+                            className="px-2.5 py-1 rounded bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 font-medium transition"
                           >
                             Proof
                           </button>

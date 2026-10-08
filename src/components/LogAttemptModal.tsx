@@ -193,7 +193,7 @@ export const LogAttemptModal: React.FC<LogAttemptModalProps> = ({
           <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/70 space-y-3 text-xs">
             <div className="flex items-center justify-between">
               <span className="font-bold text-slate-800 flex items-center gap-1.5">
-                <Navigation className="w-4 h-4 text-blue-600" />
+                <Navigation className="w-4 h-4 text-teal-600" />
                 GPS Verification Stamp
               </span>
               <button
@@ -227,13 +227,13 @@ export const LogAttemptModal: React.FC<LogAttemptModalProps> = ({
 
           {/* Recipient Details & Physical Profile (If Served) */}
           {isServedOutcome && (
-            <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-4">
+            <div className="p-4 rounded-xl border border-teal-200 bg-teal-50/40 space-y-4">
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-bold text-emerald-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <User className="w-4 h-4 text-emerald-600" />
+                <h4 className="text-xs font-bold text-teal-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <User className="w-4 h-4 text-teal-600" />
                   Party Served & Physical Description
                 </h4>
-                <span className="text-[11px] text-emerald-700 font-medium">Required for Affidavit</span>
+                <span className="text-[11px] text-teal-700 font-medium">Required for Affidavit</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -317,7 +317,7 @@ export const LogAttemptModal: React.FC<LogAttemptModalProps> = ({
                     type="checkbox"
                     checked={wearsGlasses}
                     onChange={(e) => setWearsGlasses(e.target.checked)}
-                    className="rounded text-emerald-600 focus:ring-emerald-500"
+                    className="rounded text-teal-600 focus:ring-teal-500"
                   />
                   <span className="text-slate-700">Wears Eyeglasses</span>
                 </label>

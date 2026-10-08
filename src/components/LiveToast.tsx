@@ -29,10 +29,10 @@ export const LiveToast: React.FC<LiveToastProps> = ({
         <div className="flex items-start gap-3">
           <div className={`p-2 rounded-xl text-white shrink-0 mt-0.5 ${
             notification.priority === 'success'
-              ? 'bg-emerald-600 shadow-emerald-500/20'
+              ? 'bg-teal-600 shadow-teal-500/20'
               : notification.priority === 'warning'
               ? 'bg-amber-600 shadow-amber-500/20'
-              : 'bg-blue-600 shadow-blue-500/20'
+              : 'bg-teal-600 shadow-teal-500/20'
           } shadow-md`}>
             {notification.channel === 'push' ? (
               <Smartphone className="w-5 h-5" />
@@ -51,7 +51,7 @@ export const LiveToast: React.FC<LiveToastProps> = ({
             }}
           >
             <div className="flex items-center gap-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-500">
                 {notification.channel === 'push' ? 'Push Alert' : notification.channel === 'email' ? 'Email Dispatch' : 'Live Update'}
               </span>
               <span className="text-slate-400 text-[10px]">• Just Now</span>
@@ -60,7 +60,7 @@ export const LiveToast: React.FC<LiveToastProps> = ({
             <p className="text-[11px] text-slate-300 mt-1 line-clamp-2 leading-relaxed">
               {notification.message}
             </p>
-            <span className="inline-block mt-1 text-[10px] font-mono text-blue-300 underline">
+            <span className="inline-block mt-1 text-[10px] font-mono text-teal-300 underline">
               Case #{notification.caseNumber}
             </span>
           </div>
