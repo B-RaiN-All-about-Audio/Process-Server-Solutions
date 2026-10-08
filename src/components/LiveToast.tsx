@@ -51,7 +51,7 @@ export const LiveToast: React.FC<LiveToastProps> = ({
             }}
           >
             <div className="flex items-center gap-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-400">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-500">
                 {notification.channel === 'push' ? 'Push Alert' : notification.channel === 'email' ? 'Email Dispatch' : 'Live Update'}
               </span>
               <span className="text-slate-400 text-[10px]">• Just Now</span>

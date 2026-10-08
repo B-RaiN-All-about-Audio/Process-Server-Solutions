@@ -28,7 +28,7 @@ export const ProofOfServiceModal: React.FC<ProofOfServiceModalProps> = ({
         {/* Modal Top Bar */}
         <div className="p-4 bg-slate-900 text-white flex items-center justify-between print:hidden">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-teal-400" />
+            <ShieldCheck className="w-5 h-5 text-teal-500" />
             <div>
               <h2 className="text-sm font-bold">Official Proof of Service / Affidavit</h2>
               <p className="text-[11px] text-slate-400">Judicially formatted for electronic court filing</p>

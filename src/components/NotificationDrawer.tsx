@@ -90,7 +90,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
         {/* Drawer Header */}
         <div className="p-4 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center gap-2">
-            <Bell className="w-5 h-5 text-teal-400" />
+            <Bell className="w-5 h-5 text-teal-500" />
             <div>
               <h2 className="text-sm font-bold">Live Client & Server Notifications</h2>
               <p className="text-[11px] text-slate-400">Instant updates across Web, Email & Push</p>
@@ -163,7 +163,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
           {/* Quick simulation trigger */}
           <button
             onClick={onTriggerSimulatedNotification}
-            className="w-full py-1.5 px-3 bg-gradient-to-r from-teal-600 to-teal-600 hover:from-teal-500 hover:to-teal-500 text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition"
+            className="w-full py-1.5 px-3 bg-gradient-to-r from-slate-700 to-teal-600 hover:from-slate-600 hover:to-teal-500 text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition"
           >
             <Zap className="w-3.5 h-3.5 text-amber-300" />
             Simulate New Field Attempt Event

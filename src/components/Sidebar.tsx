@@ -131,17 +131,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Top Brand Bar */}
         <div className="p-4 border-b border-slate-800/80 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-600 to-teal-700 flex items-center justify-center shadow-inner shadow-teal-400/20 shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-700 to-teal-600 flex items-center justify-center shadow-inner shadow-teal-400/20 shrink-0">
               <ShieldCheck className="w-6 h-6 text-white" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="font-bold text-base tracking-tight text-white">
-                  ProcessServer<span className="text-teal-400">Solutions</span>
+                  ProcessServer<span className="text-teal-500">Solutions</span>
                 </span>
               </div>
               <div className="flex items-center gap-1.5 mt-0.5">
-                <span className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded text-[10px] font-medium bg-teal-500/15 text-teal-400 border border-teal-500/20">
+                <span className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded text-[10px] font-medium bg-teal-500/15 text-teal-500 border border-teal-500/20">
                   <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
                   Live Dispatch
                 </span>
@@ -164,7 +164,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="px-4 pt-3 pb-2 border-b border-slate-800/60 shrink-0">
           <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center justify-between">
             <span>Active Perspective</span>
-            <span className="text-[10px] text-teal-400">Toggle View</span>
+            <span className="text-[10px] text-teal-500">Toggle View</span>
           </div>
           <div className="grid grid-cols-2 gap-1.5 p-1 bg-slate-950/60 rounded-xl border border-slate-800">
             <button
@@ -209,7 +209,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onOpenNewOrder();
               onCloseMobile();
             }}
-            className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold bg-gradient-to-r from-teal-600 to-teal-600 hover:from-teal-500 hover:to-teal-500 text-white shadow-sm shadow-teal-600/30 transition active:scale-98"
+            className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold bg-gradient-to-r from-slate-700 to-teal-600 hover:from-slate-600 hover:to-teal-500 text-white shadow-sm shadow-teal-600/30 transition active:scale-98"
           >
             <Plus className="w-4 h-4" />
             <span>New Service Order</span>
@@ -242,7 +242,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className={`p-1.5 rounded-lg transition ${
-                    isActive ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-400 group-hover:text-teal-400'
+                    isActive ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-400 group-hover:text-teal-500'
                   }`}>
                     <Icon className="w-4 h-4" />
                   </div>
@@ -275,10 +275,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
             className="w-full flex items-center justify-between p-2 rounded-xl text-xs bg-slate-950/60 hover:bg-slate-800/80 text-slate-300 border border-slate-800 transition"
           >
             <div className="flex items-center gap-2">
-              <Radio className="w-3.5 h-3.5 text-teal-400 animate-pulse" />
+              <Radio className="w-3.5 h-3.5 text-teal-500 animate-pulse" />
               <span className="font-medium">Simulate Field Event</span>
             </div>
-            <span className="text-[10px] text-teal-400">Test Feed</span>
+            <span className="text-[10px] text-teal-500">Test Feed</span>
           </button>
         </div>
 
@@ -321,7 +321,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 onOpenAuth();
                 onCloseMobile();
               }}
-              className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-teal-400 border border-teal-500/30 transition"
+              className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-teal-500 border border-teal-500/30 transition"
             >
               <User className="w-3.5 h-3.5" />
               <span>Sign In / Demo Login</span>

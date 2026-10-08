@@ -49,7 +49,7 @@ export const AffidavitsView: React.FC<AffidavitsViewProps> = ({
       {/* Banner */}
       <div className="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 bg-teal-500/10 text-teal-600 rounded-xl border border-teal-500/20">
+          <div className="p-3 bg-teal-500/10 text-teal-700 rounded-xl border border-teal-500/20">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>

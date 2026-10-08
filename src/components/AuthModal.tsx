@@ -266,7 +266,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 <Briefcase className="w-3.5 h-3.5 text-teal-600" />
                 <span>Sign In as Attorney</span>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-teal-400" />
+              <ArrowRight className="w-3.5 h-3.5 text-teal-500" />
             </button>
             <button
               type="button"

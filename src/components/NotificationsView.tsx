@@ -149,7 +149,7 @@ export const NotificationsView: React.FC<NotificationsViewProps> = ({
       <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
         {filtered.length === 0 ? (
           <div className="p-12 text-center text-slate-500">
-            <CheckCircle2 className="w-10 h-10 text-teal-400 mx-auto mb-2" />
+            <CheckCircle2 className="w-10 h-10 text-teal-500 mx-auto mb-2" />
             <p className="text-sm font-semibold">You're all caught up!</p>
             <p className="text-xs text-slate-400 mt-1">No alerts matching your current filter settings.</p>
           </div>

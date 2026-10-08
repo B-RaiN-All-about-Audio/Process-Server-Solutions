@@ -172,7 +172,7 @@ export const Header: React.FC<HeaderProps> = ({
                 title={`Logged in as ${currentUser.fullName} (${currentUser.organizationName})`}
                 className="flex items-center gap-2 p-1 pl-2 rounded-xl hover:bg-slate-100 border border-slate-200 transition"
               >
-                <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-teal-600 to-teal-600 text-white font-bold text-xs flex items-center justify-center shadow-xs">
+                <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-slate-700 to-teal-600 text-white font-bold text-xs flex items-center justify-center shadow-xs">
                   {currentUser.fullName.charAt(0)}
                 </div>
                 <span className="text-xs font-semibold text-slate-700 hidden sm:inline max-w-[100px] truncate">
