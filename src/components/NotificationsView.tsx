@@ -52,18 +52,18 @@ export const NotificationsView: React.FC<NotificationsViewProps> = ({
       case 'warning':
         return 'bg-amber-100 text-amber-800 border-amber-200';
       case 'success':
-        return 'bg-emerald-100 text-emerald-800 border-emerald-200';
+        return 'bg-teal-100 text-teal-800 border-teal-200';
       default:
-        return 'bg-blue-100 text-blue-800 border-blue-200';
+        return 'bg-teal-100 text-teal-800 border-teal-200';
     }
   };
 
   const getChannelIcon = (channel: NotificationChannel) => {
     switch (channel) {
       case 'push':
-        return <Smartphone className="w-3.5 h-3.5 text-indigo-600" />;
+        return <Smartphone className="w-3.5 h-3.5 text-teal-600" />;
       case 'email':
-        return <Mail className="w-3.5 h-3.5 text-blue-600" />;
+        return <Mail className="w-3.5 h-3.5 text-teal-600" />;
       default:
         return <Bell className="w-3.5 h-3.5 text-slate-600" />;
     }
@@ -88,9 +88,9 @@ export const NotificationsView: React.FC<NotificationsViewProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={onTriggerSimulatedNotification}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-teal-50 text-teal-700 hover:bg-teal-100 border border-teal-200 transition"
           >
-            <Radio className="w-3.5 h-3.5 text-blue-600 animate-pulse" />
+            <Radio className="w-3.5 h-3.5 text-teal-600 animate-pulse" />
             <span>Simulate Live Event</span>
           </button>
         </div>
@@ -102,7 +102,7 @@ export const NotificationsView: React.FC<NotificationsViewProps> = ({
           <select
             value={filterChannel}
             onChange={(e) => setFilterChannel(e.target.value)}
-            className="py-1.5 px-3 rounded-xl border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="py-1.5 px-3 rounded-xl border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             <option value="all">All Channels (Push, Email, In-App)</option>
             <option value="push">Mobile Push Only</option>
@@ -114,7 +114,7 @@ export const NotificationsView: React.FC<NotificationsViewProps> = ({
             onClick={() => setFilterUnreadOnly(!filterUnreadOnly)}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition ${
               filterUnreadOnly
-                ? 'bg-blue-600 text-white border-blue-600'
+                ? 'bg-teal-600 text-white border-teal-600'
                 : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
             }`}
           >
@@ -126,7 +126,7 @@ export const NotificationsView: React.FC<NotificationsViewProps> = ({
           {unreadCount > 0 && (
             <button
               onClick={onMarkAllAsRead}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50 border border-slate-200 transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-teal-600 hover:bg-teal-50 border border-slate-200 transition"
             >
               <CheckCheck className="w-3.5 h-3.5" />
               <span>Mark All Read</span>
@@ -149,7 +149,7 @@ export const NotificationsView: React.FC<NotificationsViewProps> = ({
       <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
         {filtered.length === 0 ? (
           <div className="p-12 text-center text-slate-500">
-            <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto mb-2" />
+            <CheckCircle2 className="w-10 h-10 text-teal-500 mx-auto mb-2" />
             <p className="text-sm font-semibold">You're all caught up!</p>
             <p className="text-xs text-slate-400 mt-1">No alerts matching your current filter settings.</p>
           </div>
@@ -160,7 +160,7 @@ export const NotificationsView: React.FC<NotificationsViewProps> = ({
                 key={item.id}
                 onClick={() => onSelectNotification(item.orderId)}
                 className={`p-4 sm:p-5 hover:bg-slate-50/80 transition cursor-pointer flex items-start justify-between gap-4 ${
-                  !item.read ? 'bg-blue-50/30' : ''
+                  !item.read ? 'bg-teal-50/30' : ''
                 }`}
               >
                 <div className="space-y-1.5 flex-1 min-w-0">
@@ -176,7 +176,7 @@ export const NotificationsView: React.FC<NotificationsViewProps> = ({
                       <span className="capitalize">{item.channel.replace('_', ' ')}</span>
                     </span>
                     {!item.read && (
-                      <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                      <span className="w-2 h-2 rounded-full bg-teal-600"></span>
                     )}
                   </div>
 
@@ -190,7 +190,7 @@ export const NotificationsView: React.FC<NotificationsViewProps> = ({
                 </div>
 
                 <button
-                  className="p-2 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-slate-100 transition shrink-0"
+                  className="p-2 rounded-lg text-slate-400 hover:text-teal-600 hover:bg-slate-100 transition shrink-0"
                   title="View linked order"
                 >
                   <ExternalLink className="w-4 h-4" />

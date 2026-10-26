@@ -32,13 +32,13 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({
       <button
         id="stat-all-orders"
         onClick={() => onFilterByStatus('all')}
-        className={`text-left p-4 rounded-xl border bg-white shadow-xs transition hover:border-blue-400 hover:shadow-sm ${
-          activeStatusFilter === 'all' ? 'ring-2 ring-blue-500 border-blue-500' : 'border-slate-200'
+        className={`text-left p-4 rounded-xl border bg-white shadow-xs transition hover:border-teal-400 hover:shadow-sm ${
+          activeStatusFilter === 'all' ? 'ring-2 ring-teal-500 border-teal-500' : 'border-slate-200'
         }`}
       >
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Matters</span>
-          <span className="p-1.5 rounded-lg bg-blue-50 text-blue-600">
+          <span className="p-1.5 rounded-lg bg-teal-50 text-teal-600">
             <FileCheck className="w-4 h-4" />
           </span>
         </div>
@@ -55,19 +55,19 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({
       <button
         id="stat-served-orders"
         onClick={() => onFilterByStatus('served')}
-        className={`text-left p-4 rounded-xl border bg-white shadow-xs transition hover:border-emerald-400 hover:shadow-sm ${
-          activeStatusFilter === 'served' ? 'ring-2 ring-emerald-500 border-emerald-500' : 'border-slate-200'
+        className={`text-left p-4 rounded-xl border bg-white shadow-xs transition hover:border-teal-400 hover:shadow-sm ${
+          activeStatusFilter === 'served' ? 'ring-2 ring-teal-500 border-teal-500' : 'border-slate-200'
         }`}
       >
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Served & Executed</span>
-          <span className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
+          <span className="p-1.5 rounded-lg bg-teal-50 text-teal-600">
             <CheckCircle className="w-4 h-4" />
           </span>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
-          <span className="text-2xl font-extrabold text-emerald-700">{servedOrders}</span>
-          <span className="text-xs text-emerald-600 font-medium">({serveSuccessRate}%)</span>
+          <span className="text-2xl font-extrabold text-teal-700">{servedOrders}</span>
+          <span className="text-xs text-teal-600 font-medium">({serveSuccessRate}%)</span>
         </div>
         <p className="text-[11px] text-slate-500 mt-1">
           Affidavit proof of service ready
@@ -101,18 +101,18 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({
       <button
         id="stat-assigned-orders"
         onClick={() => onFilterByStatus('assigned')}
-        className={`text-left p-4 rounded-xl border bg-white shadow-xs transition hover:border-indigo-400 hover:shadow-sm ${
-          activeStatusFilter === 'assigned' ? 'ring-2 ring-indigo-500 border-indigo-500' : 'border-slate-200'
+        className={`text-left p-4 rounded-xl border bg-white shadow-xs transition hover:border-teal-400 hover:shadow-sm ${
+          activeStatusFilter === 'assigned' ? 'ring-2 ring-teal-500 border-teal-500' : 'border-slate-200'
         }`}
       >
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Assigned Queue</span>
-          <span className="p-1.5 rounded-lg bg-indigo-50 text-indigo-600">
+          <span className="p-1.5 rounded-lg bg-teal-50 text-teal-600">
             <Zap className="w-4 h-4" />
           </span>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
-          <span className="text-2xl font-extrabold text-indigo-700">{assignedOrders}</span>
+          <span className="text-2xl font-extrabold text-teal-700">{assignedOrders}</span>
           <span className="text-xs text-slate-500">ready to run</span>
         </div>
         <p className="text-[11px] text-slate-500 mt-1">

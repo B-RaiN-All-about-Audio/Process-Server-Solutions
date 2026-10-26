@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import { readFile } from "fs/promises";
 import { createServer as createViteServer } from "vite";
 import Stripe from "stripe";
 import { 
@@ -623,9 +624,10 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
+    const indexHtml = await readFile(path.join(distPath, "index.html"), "utf8");
     app.use(express.static(distPath));
     app.use((req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
+      res.type("html").send(indexHtml);
     });
   }
 
