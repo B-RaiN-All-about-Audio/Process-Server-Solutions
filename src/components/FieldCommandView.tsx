@@ -53,8 +53,8 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
     if (searchQuery.trim() !== '') {
       const q = searchQuery.toLowerCase();
       const matchServer = item.serverName.toLowerCase().includes(q);
-      const matchRecipient = item.orderRecipient.toLowerCase().includes(q);
-      const matchCase = item.orderCaseNumber.toLowerCase().includes(q);
+      const matchRecipient = (item.orderRecipient || '').toLowerCase().includes(q);
+      const matchCase = (item.orderCaseNumber || '').toLowerCase().includes(q);
       const matchAddress = item.locationAddress.toLowerCase().includes(q);
       const matchNotes = item.notes.toLowerCase().includes(q);
       return matchServer || matchRecipient || matchCase || matchAddress || matchNotes;
@@ -167,7 +167,7 @@ export const FieldCommandView: React.FC<FieldCommandViewProps> = ({
                         ? 'bg-amber-100 text-amber-800 border border-amber-200' 
                         : 'bg-blue-100 text-blue-800 border border-blue-200'
                   }`}>
-                    {ord.priority.replace('_', ' ')}
+                    {(ord.priority || 'standard').replace('_', ' ')}
                   </span>
                 </div>
                 <div className="text-xs font-bold text-slate-900">{ord.recipientName}</div>

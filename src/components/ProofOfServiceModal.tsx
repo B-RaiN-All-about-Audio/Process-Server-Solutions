@@ -22,11 +22,11 @@ export const ProofOfServiceModal: React.FC<ProofOfServiceModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-700/50 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
       <div className="bg-white w-full max-w-3xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[95vh] animate-in fade-in zoom-in-95 duration-150">
         
         {/* Modal Top Bar */}
-        <div className="p-4 bg-slate-900 text-white flex items-center justify-between print:hidden">
+        <div className="p-4 bg-slate-800 text-white flex items-center justify-between print:hidden">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-5 h-5 text-emerald-400" />
             <div>
@@ -109,7 +109,7 @@ export const ProofOfServiceModal: React.FC<ProofOfServiceModalProps> = ({
               On the date and time specified below, I received and subsequently served true and correct copies of the following legal documents:
             </p>
             <ul className="list-disc list-inside space-y-1 pl-2 font-sans text-xs">
-              {order.documentTypes.map((doc, idx) => (
+              {(order.documentTypes && order.documentTypes.length > 0 ? order.documentTypes : ['Summons and Complaint', 'Notice of Lawsuit']).map((doc, idx) => (
                 <li key={idx} className="font-medium">{doc}</li>
               ))}
             </ul>

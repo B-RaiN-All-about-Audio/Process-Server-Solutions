@@ -9,20 +9,19 @@ import {
   User, 
   Database, 
   Plus, 
-  Radio, 
-  Briefcase, 
-  Smartphone, 
   LogOut, 
   X,
-  ChevronRight
+  ChevronRight,
+  Receipt
 } from 'lucide-react';
 import { UserRole, UserProfile, PageTab } from '../types';
+import { BrandLogo } from './BrandLogo';
 
 interface SidebarProps {
   activeTab: PageTab;
   onSelectTab: (tab: PageTab) => void;
-  currentRole: UserRole;
-  onRoleChange: (role: UserRole) => void;
+  currentRole?: UserRole;
+  onRoleChange?: (role: UserRole) => void;
   ordersCount: number;
   attemptsCount: number;
   servedCount: number;
@@ -31,7 +30,7 @@ interface SidebarProps {
   onOpenAuth: () => void;
   onSignOut: () => void;
   onOpenNewOrder: () => void;
-  onSimulateFieldAction: () => void;
+  onSimulateFieldAction?: () => void;
   isOpenMobile: boolean;
   onCloseMobile: () => void;
   firestoreConnected: boolean;
@@ -40,8 +39,8 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({
   activeTab,
   onSelectTab,
-  currentRole,
-  onRoleChange,
+  currentRole: _currentRole,
+  onRoleChange: _onRoleChange,
   ordersCount,
   attemptsCount,
   servedCount,
@@ -50,10 +49,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onOpenAuth,
   onSignOut,
   onOpenNewOrder,
-  onSimulateFieldAction,
+  onSimulateFieldAction: _onSimulateFieldAction,
   isOpenMobile,
   onCloseMobile,
-  firestoreConnected,
+  firestoreConnected: _firestoreConnected,
 }) => {
   const navItems: Array<{
     id: PageTab;
@@ -70,6 +69,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       badge: ordersCount,
       badgeColor: 'bg-blue-500/20 text-blue-300 border border-blue-500/30',
       description: 'Active cases & court summons',
+    },
+    {
+      id: 'invoices',
+      label: 'Service Invoices',
+      icon: Receipt,
+      description: 'Standard format & Stripe billing',
     },
     {
       id: 'field',
@@ -116,7 +121,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Mobile Backdrop Overlay */}
       {isOpenMobile && (
         <div 
-          className="fixed inset-0 z-40 bg-slate-950/70 backdrop-blur-xs lg:hidden transition-opacity"
+          className="fixed inset-0 z-40 bg-slate-700/50 backdrop-blur-sm lg:hidden transition-opacity"
           onClick={onCloseMobile}
           aria-hidden="true"
         />
@@ -124,79 +129,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar Container */}
       <aside 
-        className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-slate-900 border-r border-slate-800 text-white flex flex-col transition-transform duration-200 ease-in-out ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-80 bg-slate-800 border-r border-slate-700 text-white flex flex-col transition-transform duration-200 ease-in-out shadow-2xl lg:shadow-none ${
           isOpenMobile ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
         {/* Top Brand Bar */}
-        <div className="p-4 border-b border-slate-800/80 flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-inner shadow-blue-400/20 shrink-0">
-              <ShieldCheck className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-base tracking-tight text-white">
-                  ProcessServer<span className="text-blue-400">Solutions</span>
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 mt-0.5">
-                <span className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded text-[10px] font-medium bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  Live Dispatch
-                </span>
-                <span className="text-[10px] text-slate-400">Cloud SQL DB</span>
-              </div>
-            </div>
-          </div>
+        <div className="p-5 border-b border-slate-800/80 shrink-0">
+          <div className="flex items-center justify-between gap-3">
+            <BrandLogo 
+              variant="dark" 
+              onClick={() => onSelectTab('orders')} 
+              className="min-w-0 flex-1"
+            />
 
-          {/* Close button on mobile */}
-          <button
-            onClick={onCloseMobile}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 lg:hidden"
-            aria-label="Close menu"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Role Perspective Switcher Box */}
-        <div className="px-4 pt-3 pb-2 border-b border-slate-800/60 shrink-0">
-          <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center justify-between">
-            <span>Active Perspective</span>
-            <span className="text-[10px] text-blue-400">Toggle View</span>
-          </div>
-          <div className="grid grid-cols-2 gap-1.5 p-1 bg-slate-950/60 rounded-xl border border-slate-800">
+            {/* Close button on mobile drawer */}
             <button
-              id="sidebar-role-client-btn"
-              onClick={() => onRoleChange('client')}
-              className={`flex flex-col items-center justify-center py-2 px-1 rounded-lg text-xs font-semibold transition ${
-                currentRole === 'client'
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-              }`}
+              onClick={onCloseMobile}
+              className="p-2 -mr-1 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition lg:hidden shrink-0"
+              aria-label="Close menu"
             >
-              <div className="flex items-center gap-1.5">
-                <Briefcase className="w-3.5 h-3.5" />
-                <span>Client / Firm</span>
-              </div>
-              <span className="text-[9px] opacity-75 mt-0.5">Attorney Portal</span>
-            </button>
-
-            <button
-              id="sidebar-role-server-btn"
-              onClick={() => onRoleChange('process_server')}
-              className={`flex flex-col items-center justify-center py-2 px-1 rounded-lg text-xs font-semibold transition ${
-                currentRole === 'process_server'
-                  ? 'bg-amber-600 text-white shadow-sm'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-              }`}
-            >
-              <div className="flex items-center gap-1.5">
-                <Smartphone className="w-3.5 h-3.5" />
-                <span>Server App</span>
-              </div>
-              <span className="text-[9px] opacity-75 mt-0.5">Field Command</span>
+              <X className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -266,24 +218,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
           })}
         </div>
 
-        {/* Quick Simulation & Activity Trigger */}
-        <div className="px-4 py-2 border-t border-slate-800/80 shrink-0">
-          <button
-            id="sidebar-simulate-btn"
-            onClick={onSimulateFieldAction}
-            title="Trigger a live simulated process server field attempt"
-            className="w-full flex items-center justify-between p-2 rounded-xl text-xs bg-slate-950/60 hover:bg-slate-800/80 text-slate-300 border border-slate-800 transition"
-          >
-            <div className="flex items-center gap-2">
-              <Radio className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
-              <span className="font-medium">Simulate Field Event</span>
-            </div>
-            <span className="text-[10px] text-blue-400">Test Feed</span>
-          </button>
-        </div>
-
         {/* User Account & Database Status Footer */}
-        <div className="p-3 border-t border-slate-800 bg-slate-950/80 shrink-0">
+        <div className="p-3 border-t border-slate-700 bg-slate-800/90 shrink-0">
           {currentUser ? (
             <div className="flex items-center justify-between gap-2">
               <button

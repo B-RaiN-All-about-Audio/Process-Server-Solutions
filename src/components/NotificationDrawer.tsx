@@ -84,11 +84,11 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden bg-slate-900/60 backdrop-blur-xs flex justify-end">
+    <div className="fixed inset-0 z-50 overflow-hidden bg-slate-700/50 backdrop-blur-sm flex justify-end">
       <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col animate-in slide-in-from-right duration-200 border-l border-slate-200">
         
         {/* Drawer Header */}
-        <div className="p-4 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+        <div className="p-4 bg-slate-800 text-white flex items-center justify-between border-b border-slate-700">
           <div className="flex items-center gap-2">
             <Bell className="w-5 h-5 text-blue-400" />
             <div>
@@ -111,7 +111,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
               <button
                 onClick={() => setChannelFilter('all')}
                 className={`px-2 py-1 rounded-md font-medium transition ${
-                  channelFilter === 'all' ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-200'
+                  channelFilter === 'all' ? 'bg-slate-800 text-white' : 'text-slate-600 hover:bg-slate-200'
                 }`}
               >
                 All ({notifications.length})

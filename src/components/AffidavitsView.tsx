@@ -34,11 +34,11 @@ export const AffidavitsView: React.FC<AffidavitsViewProps> = ({
   const filteredServed = servedOrders.filter((order) => {
     if (searchQuery.trim() !== '') {
       const q = searchQuery.toLowerCase();
-      const matchCase = order.caseNumber.toLowerCase().includes(q);
-      const matchCourt = order.courtName.toLowerCase().includes(q);
-      const matchRecipient = order.recipientName.toLowerCase().includes(q);
+      const matchCase = (order.caseNumber || '').toLowerCase().includes(q);
+      const matchCourt = (order.courtName || '').toLowerCase().includes(q);
+      const matchRecipient = (order.recipientName || order.entityBeingServed || '').toLowerCase().includes(q);
       const matchServer = (order.assignedServerName || '').toLowerCase().includes(q);
-      const matchFirm = order.clientFirm.toLowerCase().includes(q);
+      const matchFirm = (order.clientFirm || order.responsibleParty || '').toLowerCase().includes(q);
       return matchCase || matchCourt || matchRecipient || matchServer || matchFirm;
     }
     return true;

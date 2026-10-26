@@ -64,6 +64,11 @@ export const Header: React.FC<HeaderProps> = ({
           title: 'Proof of Service & Affidavits',
           subtitle: 'Court-certified declarations of diligence and completed service returns',
         };
+      case 'invoices':
+        return {
+          title: 'Service Invoices & Stripe Billing',
+          subtitle: 'Standardized civil process billing format with instant online payment checkout',
+        };
       case 'analytics':
         return {
           title: 'Operational Metrics & Reports',
@@ -90,20 +95,23 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center justify-between h-16 sm:h-18 gap-3">
           
           {/* Left: Mobile hamburger + Page Title */}
-          <div className="flex items-center gap-3 min-w-0">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
             <button
               id="mobile-menu-toggle"
               onClick={onToggleMobileSidebar}
-              className="p-2 -ml-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 lg:hidden focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 -ml-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 lg:hidden focus:outline-none focus:ring-2 focus:ring-blue-500 shrink-0 flex items-center gap-1 text-xs font-semibold"
               aria-label="Open navigation sidebar"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5 text-slate-700" />
+              <span className="hidden xs:inline text-[11px] text-slate-500">Menu</span>
             </button>
 
-            <div className="truncate">
-              <h1 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight truncate flex items-center gap-2">
-                <span>{currentMeta.title}</span>
-                <span className={`hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold border ${
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <h1 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight truncate">
+                  {currentMeta.title}
+                </h1>
+                <span className={`hidden xl:inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold border ${
                   currentRole === 'client' 
                     ? 'bg-blue-50 text-blue-700 border-blue-200'
                     : 'bg-amber-50 text-amber-800 border-amber-200'
@@ -111,7 +119,7 @@ export const Header: React.FC<HeaderProps> = ({
                   {currentRole === 'client' ? (
                     <>
                       <Briefcase className="w-3 h-3" />
-                      Attorney Portal
+                      Client Portal
                     </>
                   ) : (
                     <>
@@ -120,8 +128,8 @@ export const Header: React.FC<HeaderProps> = ({
                     </>
                   )}
                 </span>
-              </h1>
-              <p className="text-xs text-slate-500 hidden md:block truncate">
+              </div>
+              <p className="text-xs text-slate-500 hidden lg:block truncate">
                 {currentMeta.subtitle}
               </p>
             </div>
