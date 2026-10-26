@@ -119,7 +119,7 @@ export const LogAttemptModal: React.FC<LogAttemptModalProps> = ({
   const isServedOutcome = outcome === 'personal_service' || outcome === 'substituted_service';
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-700/50 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
       <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[94vh] animate-in fade-in zoom-in-95 duration-150">
         
         {/* Header */}

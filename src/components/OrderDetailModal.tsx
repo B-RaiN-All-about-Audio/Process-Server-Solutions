@@ -16,9 +16,27 @@ import {
   FileCheck,
   Navigation,
   Copy,
-  PlusCircle
+  PlusCircle,
+  Receipt
 } from 'lucide-react';
-import { ServiceOrder, ServiceAttempt, UserRole } from '../types';
+import { 
+  ServiceOrder, 
+  ServiceAttempt, 
+  UserRole,
+  getOrderEntity,
+  getOrderAddress,
+  getOrderDateAdded,
+  getOrderStatus,
+  getOrderDateClosed,
+  getOrderClosedStatus,
+  getOrderResponsibleParty,
+  getOrderInvoiceStatus,
+  getOrderDueDate,
+  getOrderSpeed,
+  getOrderPlaintiff,
+  getOrderDefendant,
+  getOrderComments
+} from '../types';
 
 interface OrderDetailModalProps {
   order: ServiceOrder | null;
@@ -26,6 +44,7 @@ interface OrderDetailModalProps {
   currentRole: UserRole;
   onLogAttempt: (order: ServiceOrder) => void;
   onViewProof: (order: ServiceOrder) => void;
+  onOpenInvoice?: (order: ServiceOrder) => void;
 }
 
 export const OrderDetailModal: React.FC<OrderDetailModalProps> = ({
@@ -34,6 +53,7 @@ export const OrderDetailModal: React.FC<OrderDetailModalProps> = ({
   currentRole,
   onLogAttempt,
   onViewProof,
+  onOpenInvoice,
 }) => {
   if (!order) return null;
 
@@ -66,11 +86,11 @@ export const OrderDetailModal: React.FC<OrderDetailModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-700/50 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
       <div className="bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-150">
         
         {/* Modal Header */}
-        <div className="p-4 sm:p-6 bg-slate-900 text-white flex items-start justify-between gap-4">
+        <div className="p-4 sm:p-6 bg-slate-800 text-white flex items-start justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-sm font-bold bg-slate-800 px-2.5 py-1 rounded border border-slate-700 text-teal-500">
@@ -83,7 +103,7 @@ export const OrderDetailModal: React.FC<OrderDetailModalProps> = ({
                   ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
                   : 'bg-slate-800 text-slate-300 border border-slate-700'
               }`}>
-                {order.priority.toUpperCase()} PRIORITY
+                {(order.priority || 'standard').toUpperCase()} PRIORITY
               </span>
               {order.status === 'served' ? (
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">
@@ -118,14 +138,25 @@ export const OrderDetailModal: React.FC<OrderDetailModalProps> = ({
           <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
             <div className="flex items-center gap-2 text-xs text-slate-500">
               <Calendar className="w-4 h-4 text-slate-400" />
-              <span>Created: {new Date(order.createdAt).toLocaleDateString()}</span>
+              <span>Created: {order.createdAt ? new Date(order.createdAt).toLocaleDateString() : (order.dateAdded || 'N/A')}</span>
               <span>•</span>
               <span className="text-rose-600 font-semibold">
-                Deadline: {new Date(order.deadlineDate).toLocaleDateString()}
+                Deadline: {order.deadlineDate ? new Date(order.deadlineDate).toLocaleDateString() : (order.dueDateRequested || 'Standard')}
               </span>
             </div>
 
             <div className="flex items-center gap-2">
+              {onOpenInvoice && (
+                <button
+                  id="order-detail-open-invoice-btn"
+                  onClick={() => onOpenInvoice(order)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-xs transition"
+                >
+                  <Receipt className="w-4 h-4" />
+                  Generate Invoice (Stripe)
+                </button>
+              )}
+
               {order.status === 'served' ? (
                 <button
                   id="view-proof-action-btn"
@@ -145,6 +176,174 @@ export const OrderDetailModal: React.FC<OrderDetailModalProps> = ({
                   Log New Field Attempt
                 </button>
               )}
+            </div>
+          </div>
+
+          {/* Section: Standardized Field Workflow Data Entry Fields */}
+          <div className="pt-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold tracking-widest text-emerald-600 uppercase">
+                FIELD WORKFLOW DATA ENTRY RECORD
+              </span>
+              <span className="text-[11px] font-mono text-slate-500">
+                ID: {order.id}
+              </span>
+            </div>
+
+            <div className="bg-slate-800 text-white rounded-xl p-4 sm:p-5 border border-slate-700 shadow-md">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                {/* 1. Entity Being Served */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Entity Being Served
+                  </span>
+                  <div className="text-white font-semibold text-sm">
+                    {getOrderEntity(order)}
+                  </div>
+                </div>
+
+                {/* 2. Service Address */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <div className="flex items-start justify-between gap-1">
+                    <div>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                        Service Address
+                      </span>
+                      <div className="text-white font-medium">
+                        {getOrderAddress(order)}
+                      </div>
+                    </div>
+                    <button
+                      onClick={handleCopyAddress}
+                      className="p-1 rounded hover:bg-slate-700 text-slate-400 hover:text-white transition shrink-0"
+                      title="Copy Address"
+                    >
+                      <Copy className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                  {copied && (
+                    <span className="text-[10px] text-emerald-400 font-medium block mt-1">
+                      Copied to clipboard!
+                    </span>
+                  )}
+                </div>
+
+                {/* 3. Date Added (MM/DD/YYYY) */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Date Added (MM/DD/YYYY)
+                  </span>
+                  <div className="font-mono text-slate-200">
+                    {getOrderDateAdded(order)}
+                  </div>
+                </div>
+
+                {/* 4. Order Status */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Order Status
+                  </span>
+                  <div>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      {getOrderStatus(order)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* 5. Date Closed (MM/DD/YYYY) */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Date Closed (MM/DD/YYYY)
+                  </span>
+                  <div className="font-mono text-slate-300">
+                    {getOrderDateClosed(order)}
+                  </div>
+                </div>
+
+                {/* 6. Closed Status */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Closed Status
+                  </span>
+                  <div className="text-slate-200 font-medium">
+                    {getOrderClosedStatus(order)}
+                  </div>
+                </div>
+
+                {/* 7. Responsible Party (Client) */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Responsible Party (Client)
+                  </span>
+                  <div className="text-slate-200 font-semibold">
+                    {getOrderResponsibleParty(order)}
+                  </div>
+                </div>
+
+                {/* 8. Service Invoice Status */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Service Invoice Status
+                  </span>
+                  <div>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                      {getOrderInvoiceStatus(order)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* 9. Due Date Requested (MM/DD/YYYY) */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Due Date Requested (MM/DD/YYYY)
+                  </span>
+                  <div className="font-mono text-rose-300 font-bold">
+                    {getOrderDueDate(order)}
+                  </div>
+                </div>
+
+                {/* 10. Service Speed Requested */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Service Speed Requested
+                  </span>
+                  <div>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                      {getOrderSpeed(order)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* 11. Plaintiff Name */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Plaintiff Name
+                  </span>
+                  <div className="text-slate-200">
+                    {getOrderPlaintiff(order)}
+                  </div>
+                </div>
+
+                {/* 12. Defendant Name */}
+                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Defendant Name
+                  </span>
+                  <div className="text-slate-200">
+                    {getOrderDefendant(order)}
+                  </div>
+                </div>
+
+                {/* 13. Comments/Notes (full-width) */}
+                <div className="md:col-span-2 p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    Comments/Notes
+                  </span>
+                  <div className="text-slate-300 whitespace-pre-wrap">
+                    {getOrderComments(order)}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -222,10 +421,10 @@ export const OrderDetailModal: React.FC<OrderDetailModalProps> = ({
           {/* Section: Documents Included */}
           <div className="pt-6 space-y-3">
             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Legal Documents in Service Packet ({order.documentTypes.length})
+              Legal Documents in Service Packet ({(order.documentTypes || []).length})
             </h3>
             <div className="flex flex-wrap gap-2">
-              {order.documentTypes.map((doc, idx) => (
+              {(order.documentTypes || []).map((doc, idx) => (
                 <span
                   key={idx}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-50 text-teal-900 border border-teal-200 text-xs font-medium"

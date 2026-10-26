@@ -24,7 +24,7 @@ export const LiveToast: React.FC<LiveToastProps> = ({
   if (!notification) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 max-w-sm w-full bg-slate-900 text-white rounded-2xl p-4 shadow-2xl border border-slate-700/80 animate-in slide-in-from-bottom-5 duration-300">
+    <div className="fixed bottom-4 right-4 z-50 max-w-sm w-full bg-slate-800 text-white rounded-2xl p-4 shadow-2xl border border-slate-600 animate-in slide-in-from-bottom-5 duration-300">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3">
           <div className={`p-2 rounded-xl text-white shrink-0 mt-0.5 ${

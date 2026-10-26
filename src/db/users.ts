@@ -101,12 +101,27 @@ export async function getServiceOrdersFromDb(): Promise<ServiceOrder[]> {
       return {
         id: o.id,
         creatorUid: o.creatorUid || undefined,
+        // Fields from screenshot
+        entityBeingServed: o.recipientName,
+        serviceAddress: o.serviceAddress,
+        dateAdded: new Date(o.createdAt).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }),
+        orderStatus: o.status === 'served' ? 'Served' : o.status === 'non_served' ? 'Non-Served' : o.status === 'in_progress' ? 'In Progress' : 'Open',
+        dateClosed: o.status === 'served' && o.proofOfServiceSignedAt ? new Date(o.proofOfServiceSignedAt).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) : 'N/A',
+        closedStatus: o.status === 'served' ? 'Served' : o.status === 'non_served' ? 'Non-Served' : 'N/A',
+        responsiblePartyClient: `${o.clientName} (${o.clientFirm})`,
+        responsibleParty: `${o.clientName} (${o.clientFirm})`,
+        serviceInvoiceStatus: o.status === 'served' ? 'Paid in Full' : 'Sent–Pending',
+        dueDateRequested: new Date(o.deadlineDate).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }),
+        serviceSpeedRequested: o.priority === 'same_day' ? 'Same Day Urgent' : o.priority === 'rush' ? 'Rush (24–48 Hours)' : 'Standard (3–5 Days)',
+        plaintiffName: o.plaintiff,
+        defendantName: o.defendant,
+        commentsNotes: o.specialInstructions || '',
+        // Core/legacy fields
         caseNumber: o.caseNumber,
         courtName: o.courtName,
         plaintiff: o.plaintiff,
         defendant: o.defendant,
         recipientName: o.recipientName,
-        serviceAddress: o.serviceAddress,
         priority: o.priority as ServiceOrder['priority'],
         status: o.status as ServiceOrder['status'],
         clientName: o.clientName,
@@ -132,29 +147,43 @@ export async function getServiceOrdersFromDb(): Promise<ServiceOrder[]> {
 
 export async function saveServiceOrderToDb(order: ServiceOrder) {
   try {
+    const safeCase = order.caseNumber || `CV-${order.id.slice(-4)}`;
+    const safeCourt = order.courtName || 'Superior Court of California';
+    const safePlaintiff = order.plaintiffName || order.plaintiff || 'Plaintiff';
+    const safeDefendant = order.defendantName || order.defendant || 'Defendant';
+    const safeRecipient = order.entityBeingServed || order.recipientName || 'Recipient';
+    const safePriority = order.priority || (order.serviceSpeedRequested === 'Same Day Urgent' ? 'same_day' : order.serviceSpeedRequested === 'Rush (24–48 Hours)' ? 'rush' : 'standard');
+    const safeStatus = order.status || (order.orderStatus === 'Served' ? 'served' : order.orderStatus === 'Non-Served' ? 'non_served' : 'in_progress');
+    const safeClient = order.clientName || order.responsibleParty || 'Client';
+    const safeFirm = order.clientFirm || 'Legal Counsel';
+    const safeEmail = order.clientEmail || 'attorney@lawfirm.example';
+    const safeDeadline = order.dueDateRequested || order.deadlineDate || new Date().toISOString();
+    const safeCreated = order.createdAt || new Date().toISOString();
+    const safeUpdated = order.updatedAt || new Date().toISOString();
+
     await db.insert(serviceOrders)
       .values({
         id: order.id,
         creatorUid: order.creatorUid || null,
-        caseNumber: order.caseNumber,
-        courtName: order.courtName,
-        plaintiff: order.plaintiff,
-        defendant: order.defendant,
-        recipientName: order.recipientName,
+        caseNumber: safeCase,
+        courtName: safeCourt,
+        plaintiff: safePlaintiff,
+        defendant: safeDefendant,
+        recipientName: safeRecipient,
         serviceAddress: order.serviceAddress,
-        priority: order.priority,
-        status: order.status,
-        clientName: order.clientName,
-        clientFirm: order.clientFirm,
-        clientEmail: order.clientEmail,
+        priority: safePriority,
+        status: safeStatus,
+        clientName: safeClient,
+        clientFirm: safeFirm,
+        clientEmail: safeEmail,
         assignedServerName: order.assignedServerName || null,
         documentsToServe: JSON.stringify(order.documentTypes || []),
-        specialInstructions: order.specialInstructions || null,
-        deadlineDate: order.deadlineDate,
+        specialInstructions: order.commentsNotes || order.specialInstructions || null,
+        deadlineDate: safeDeadline,
         proofOfServiceSignedAt: order.proofOfServiceSignedAt || null,
         proofOfServiceSigner: order.proofOfServiceSigner || null,
-        createdAt: order.createdAt,
-        updatedAt: order.updatedAt,
+        createdAt: safeCreated,
+        updatedAt: safeUpdated,
       })
       .onConflictDoUpdate({
         target: serviceOrders.id,

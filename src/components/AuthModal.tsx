@@ -37,8 +37,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
-  const [role, setRole] = useState<UserRole>('client');
+  const [role, setRole] = useState<UserRole>('process_server');
   const [organizationName, setOrganizationName] = useState('');
+  const [companyMotto, setCompanyMotto] = useState('');
+  const [billingPoBox, setBillingPoBox] = useState('');
+  const [billingCityStateZip, setBillingCityStateZip] = useState('');
+  const [showBillingCustomization, setShowBillingCustomization] = useState(false);
   const [phone, setPhone] = useState('');
   const [badgeNumber, setBadgeNumber] = useState('');
   const [coverageArea, setCoverageArea] = useState('Los Angeles County');
@@ -50,29 +54,67 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleDemoSignIn = async (demoRole: UserRole) => {
+  const handleDemoSignIn = async (demoType: 'lejeune' | 'vance' | 'client') => {
     setLoading(true);
     setErrorMsg(null);
-    const isClient = demoRole === 'client';
     
-    // Build the high-fidelity demo profile
-    const demoProfile: UserProfile = {
-      userId: isClient ? 'demo-client-01' : 'demo-server-01',
-      email: isClient ? 'sarah.jenkins@sterlinglit.com' : 'marcus.vance@vanceserves.com',
-      fullName: isClient ? 'Sarah Jenkins, Esq.' : 'Marcus Vance',
-      role: demoRole,
-      organizationName: isClient ? 'Jenkins & Sterling Litigation LLP' : 'Vance Registered Legal Process Servers',
-      phone: isClient ? '(213) 555-8830' : '(310) 555-7291',
-      badgeNumber: isClient ? undefined : 'LA-4991',
-      coverageArea: isClient ? undefined : 'Southern California District',
-      subscriptionPlan: 'professional',
-      createdAt: new Date().toISOString(),
-    };
+    let demoProfile: UserProfile;
+    let demoEmail = '';
+    let demoPass = 'DemoPass2026!';
+
+    if (demoType === 'lejeune') {
+      demoEmail = 'robert.lejeune@lejeuneprocess.com';
+      demoProfile = {
+        userId: 'demo-server-lejeune',
+        email: demoEmail,
+        fullName: 'Robert Lejeune',
+        role: 'process_server',
+        organizationName: 'Lejeune Civil Process',
+        companyMotto: 'Put the Papers in Our Hands So We Can Put the Papers in Theirs',
+        billingPoBox: 'PO Box 12301',
+        billingCityStateZip: 'Jacksonville, NC 28546',
+        phone: '(910) 555-4920',
+        badgeNumber: 'NC-3012',
+        coverageArea: 'Onslow County & Coastal District',
+        subscriptionPlan: 'professional',
+        createdAt: new Date().toISOString(),
+      };
+    } else if (demoType === 'vance') {
+      demoEmail = 'marcus.vance@vanceserves.com';
+      demoProfile = {
+        userId: 'demo-server-01',
+        email: demoEmail,
+        fullName: 'Marcus Vance',
+        role: 'process_server',
+        organizationName: 'Vance Registered Legal Process Servers',
+        companyMotto: 'Diligent Field Execution & Court Affidavits',
+        billingPoBox: 'PO Box 4502',
+        billingCityStateZip: 'Los Angeles, CA 90012',
+        phone: '(310) 555-7291',
+        badgeNumber: 'LA-4991',
+        coverageArea: 'Southern California District',
+        subscriptionPlan: 'professional',
+        createdAt: new Date().toISOString(),
+      };
+    } else {
+      demoEmail = 'sarah.jenkins@sterlinglit.com';
+      demoProfile = {
+        userId: 'demo-client-01',
+        email: demoEmail,
+        fullName: 'Sarah Jenkins, Esq.',
+        role: 'client',
+        organizationName: 'Jenkins & Sterling Litigation LLP',
+        companyMotto: 'Excellence in Civil Trial & Commercial Litigation',
+        billingPoBox: 'Suite 1800, 777 Tower Blvd',
+        billingCityStateZip: 'Los Angeles, CA 90017',
+        phone: '(213) 555-8830',
+        subscriptionPlan: 'professional',
+        createdAt: new Date().toISOString(),
+      };
+    }
 
     try {
       // Attempt Firebase Email/Password credential for demo if available
-      const demoEmail = isClient ? 'demo.client@sterlinglit.com' : 'demo.server@vanceserves.com';
-      const demoPass = 'DemoPass2026!';
       try {
         const cred = await signInWithEmailAndPassword(auth, demoEmail, demoPass);
         if (cred?.user?.uid) {
@@ -86,7 +128,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               demoProfile.userId = newCred.user.uid;
             }
           } catch (createErr) {
-            // Creation restricted by Firebase project config; proceed with local demo profile
+            // Proceed with local profile
           }
         }
       }
@@ -101,13 +143,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         body: JSON.stringify(demoProfile),
       }).catch(() => {});
 
-      setSuccessMsg(`Signed in as ${demoProfile.fullName} (${isClient ? 'Attorney / Client' : 'Process Server'})!`);
+      setSuccessMsg(`Signed in as ${demoProfile.organizationName}! Invoices will display this title.`);
       setTimeout(() => {
         onUserAuthenticated(demoProfile);
         onClose();
       }, 500);
     } catch (err: any) {
-      // Clean fallback
       onUserAuthenticated(demoProfile);
       onClose();
     } finally {
@@ -132,7 +173,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           email: email.trim(),
           fullName: fullName.trim(),
           role,
-          organizationName: organizationName.trim() || (role === 'client' ? 'Legal Associates' : 'Process Serving Agency'),
+          organizationName: organizationName.trim() || (role === 'client' ? 'Legal Associates LLP' : 'Civil Process Agency'),
+          companyMotto: companyMotto.trim() || undefined,
+          billingPoBox: billingPoBox.trim() || undefined,
+          billingCityStateZip: billingCityStateZip.trim() || undefined,
           phone: phone.trim() || undefined,
           badgeNumber: role === 'process_server' ? (badgeNumber.trim() || 'REG-PENDING') : undefined,
           coverageArea: role === 'process_server' ? coverageArea.trim() : undefined,
@@ -200,13 +244,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-700/50 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
       <div className="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[94vh] animate-in fade-in zoom-in-95 duration-150">
         
         {/* Header */}
-        <div className="p-5 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+        <div className="p-5 bg-slate-800 text-white flex items-center justify-between border-b border-slate-700">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-teal-600 flex items-center justify-center shadow-inner">
+            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shadow-inner">
               <Database className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -234,7 +278,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             type="button"
             onClick={() => { setIsSignUp(true); setErrorMsg(null); }}
             className={`py-2 rounded-lg transition ${
-              isSignUp ? 'bg-white text-teal-600 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              isSignUp ? 'bg-white text-blue-600 shadow-xs' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             Sign Up & Save Profile
@@ -243,7 +287,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             type="button"
             onClick={() => { setIsSignUp(false); setErrorMsg(null); }}
             className={`py-2 rounded-lg transition ${
-              !isSignUp ? 'bg-white text-teal-600 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              !isSignUp ? 'bg-white text-blue-600 shadow-xs' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             Existing User Sign In
@@ -251,34 +295,51 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         </div>
 
         {/* Quick Demo Logins */}
-        <div className="p-4 bg-teal-50/70 border-b border-teal-100 space-y-2">
-          <span className="text-[11px] font-bold text-teal-900 uppercase tracking-wider block">
-            ⚡ Quick Evaluation Sign In (One-Click Firestore Profile)
-          </span>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <div className="p-4 bg-blue-50/70 border-b border-blue-100 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-blue-900 uppercase tracking-wider block">
+              ⚡ 1-Click Evaluation Sign In (Sets Invoice Title)
+            </span>
+            <span className="text-[10px] text-blue-600 font-medium">Auto-brands invoices</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <button
+              type="button"
+              onClick={() => handleDemoSignIn('lejeune')}
+              disabled={loading}
+              className="px-2.5 py-2 bg-white hover:bg-emerald-50 text-emerald-950 rounded-xl border border-emerald-300 text-xs font-bold flex flex-col items-start shadow-2xs transition"
+            >
+              <div className="flex items-center gap-1.5 w-full justify-between">
+                <span className="text-emerald-700 font-bold truncate">Lejeune Civil Process</span>
+                <span className="text-[9px] px-1 py-0.5 rounded bg-emerald-100 text-emerald-800 font-mono">Server</span>
+              </div>
+              <span className="text-[10px] text-slate-500 font-normal mt-0.5">Robert Lejeune (Owner)</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleDemoSignIn('vance')}
+              disabled={loading}
+              className="px-2.5 py-2 bg-white hover:bg-amber-50 text-amber-950 rounded-xl border border-amber-300 text-xs font-bold flex flex-col items-start shadow-2xs transition"
+            >
+              <div className="flex items-center gap-1.5 w-full justify-between">
+                <span className="text-amber-800 font-bold truncate">Vance Legal Servers</span>
+                <span className="text-[9px] px-1 py-0.5 rounded bg-amber-100 text-amber-800 font-mono">Server</span>
+              </div>
+              <span className="text-[10px] text-slate-500 font-normal mt-0.5">Marcus Vance</span>
+            </button>
+
             <button
               type="button"
               onClick={() => handleDemoSignIn('client')}
               disabled={loading}
-              className="px-3 py-2 bg-white hover:bg-teal-100/70 text-teal-900 rounded-xl border border-teal-200 text-xs font-bold flex items-center justify-between shadow-2xs transition"
+              className="px-2.5 py-2 bg-white hover:bg-blue-50 text-blue-950 rounded-xl border border-blue-300 text-xs font-bold flex flex-col items-start shadow-2xs transition"
             >
-              <div className="flex items-center gap-1.5">
-                <Briefcase className="w-3.5 h-3.5 text-teal-600" />
-                <span>Sign In as Attorney</span>
+              <div className="flex items-center gap-1.5 w-full justify-between">
+                <span className="text-blue-700 font-bold truncate">Jenkins & Sterling</span>
+                <span className="text-[9px] px-1 py-0.5 rounded bg-blue-100 text-blue-800 font-mono">Law Firm</span>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-teal-500" />
-            </button>
-            <button
-              type="button"
-              onClick={() => handleDemoSignIn('process_server')}
-              disabled={loading}
-              className="px-3 py-2 bg-white hover:bg-amber-100/70 text-amber-950 rounded-xl border border-amber-200 text-xs font-bold flex items-center justify-between shadow-2xs transition"
-            >
-              <div className="flex items-center gap-1.5">
-                <Smartphone className="w-3.5 h-3.5 text-amber-600" />
-                <span>Sign In as Process Server</span>
-              </div>
-              <ArrowRight className="w-3.5 h-3.5 text-amber-500" />
+              <span className="text-[10px] text-slate-500 font-normal mt-0.5">Sarah Jenkins, Esq.</span>
             </button>
           </div>
         </div>
@@ -292,8 +353,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         )}
 
         {successMsg && (
-          <div className="mx-6 mt-4 p-3 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 text-xs flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" />
+          <div className="mx-6 mt-4 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>{successMsg}</span>
           </div>
         )}
@@ -306,27 +367,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               {/* Account Role Selector */}
               <div className="space-y-1.5">
                 <label className="text-slate-800 font-bold block uppercase tracking-wider text-[11px]">
-                  Select Your SaaS Account Role *
+                  Select Your Account Role *
                 </label>
                 <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setRole('client')}
-                    className={`p-3 rounded-xl border text-left transition ${
-                      role === 'client'
-                        ? 'border-teal-600 bg-teal-50/70 ring-2 ring-teal-500/20 text-teal-950'
-                        : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700'
-                    }`}
-                  >
-                    <div className="font-bold flex items-center gap-1.5">
-                      <Briefcase className="w-3.5 h-3.5 text-teal-600" />
-                      <span>Law Firm / Client</span>
-                    </div>
-                    <p className="text-[10px] text-slate-500 mt-1">
-                      Attorneys, paralegals, landlords ordering service of process
-                    </p>
-                  </button>
-
                   <button
                     type="button"
                     onClick={() => setRole('process_server')}
@@ -338,10 +381,28 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   >
                     <div className="font-bold flex items-center gap-1.5">
                       <Smartphone className="w-3.5 h-3.5 text-amber-600" />
-                      <span>Process Server</span>
+                      <span>Process Serving Company</span>
                     </div>
                     <p className="text-[10px] text-slate-500 mt-1">
-                      Registered field servers logging attempts & proof of service
+                      Process server agencies creating and issuing branded service invoices
+                    </p>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setRole('client')}
+                    className={`p-3 rounded-xl border text-left transition ${
+                      role === 'client'
+                        ? 'border-blue-600 bg-blue-50/70 ring-2 ring-blue-500/20 text-blue-950'
+                        : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700'
+                    }`}
+                  >
+                    <div className="font-bold flex items-center gap-1.5">
+                      <Briefcase className="w-3.5 h-3.5 text-blue-600" />
+                      <span>Law Firm / Client</span>
+                    </div>
+                    <p className="text-[10px] text-slate-500 mt-1">
+                      Attorneys, litigation counsel & corporate legal ordering service
                     </p>
                   </button>
                 </div>
@@ -351,31 +412,92 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="text-slate-700 font-semibold block mb-1">
-                    {role === 'client' ? 'Attorney / Contact Name *' : 'Server Full Legal Name *'}
+                    {role === 'client' ? 'Attorney / Contact Name *' : 'Owner / Server Legal Name *'}
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder={role === 'client' ? 'e.g. Rachel Thorne, Esq.' : 'e.g. Marcus Vance'}
+                    placeholder={role === 'client' ? 'e.g. Rachel Thorne, Esq.' : 'e.g. Robert Lejeune'}
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   />
                 </div>
 
                 <div>
                   <label className="text-slate-700 font-semibold block mb-1">
-                    {role === 'client' ? 'Law Firm / Company Name *' : 'Process Serving Agency *'}
+                    Company / Organization Name *
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder={role === 'client' ? 'e.g. Thorne & Bay Law LLC' : 'e.g. Vanguard Process Servers'}
+                    placeholder={role === 'client' ? 'e.g. Thorne & Bay Law LLC' : 'e.g. Lejeune Civil Process'}
                     value={organizationName}
                     onChange={(e) => setOrganizationName(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-semibold focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   />
+                  <span className="text-[10px] text-blue-600 mt-0.5 block font-medium">
+                    ✦ This company title prints at the top of all your service invoices.
+                  </span>
                 </div>
+              </div>
+
+              {/* Collapsible Invoice Header Details */}
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                <button
+                  type="button"
+                  onClick={() => setShowBillingCustomization(!showBillingCustomization)}
+                  className="w-full flex items-center justify-between text-left font-semibold text-slate-800"
+                >
+                  <span className="flex items-center gap-1.5">
+                    <span>Invoice Customization: Motto & Remit Address</span>
+                    <span className="text-[10px] text-slate-500 font-normal">(Optional)</span>
+                  </span>
+                  <span className="text-blue-600 text-xs">{showBillingCustomization ? 'Hide ▲' : 'Customize ▼'}</span>
+                </button>
+
+                {showBillingCustomization && (
+                  <div className="pt-2 space-y-2.5 border-t border-slate-200">
+                    <div>
+                      <label className="text-slate-600 block mb-0.5 text-[11px]">
+                        Company Motto / Tagline (under invoice title)
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Put the Papers in Our Hands So We Can Put the Papers in Theirs"
+                        value={companyMotto}
+                        onChange={(e) => setCompanyMotto(e.target.value)}
+                        className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs"
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="text-slate-600 block mb-0.5 text-[11px]">
+                          Billing / Remit P.O. Box
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. PO Box 12301"
+                          value={billingPoBox}
+                          onChange={(e) => setBillingPoBox(e.target.value)}
+                          className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-slate-600 block mb-0.5 text-[11px]">
+                          City, State, Zip
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Jacksonville, NC 28546"
+                          value={billingCityStateZip}
+                          onChange={(e) => setBillingCityStateZip(e.target.value)}
+                          className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Process server specific fields */}
@@ -385,7 +507,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     <label className="text-amber-950 font-semibold block mb-1">Badge / License Number</label>
                     <input
                       type="text"
-                      placeholder="e.g. LA-4991"
+                      placeholder="e.g. NC-3012 or LA-4991"
                       value={badgeNumber}
                       onChange={(e) => setBadgeNumber(e.target.value)}
                       className="w-full px-3 py-1.5 bg-white border border-amber-300 rounded-lg text-xs font-mono"
@@ -395,7 +517,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     <label className="text-amber-950 font-semibold block mb-1">Coverage Area / County</label>
                     <input
                       type="text"
-                      placeholder="e.g. Los Angeles & Orange County"
+                      placeholder="e.g. Onslow County & Coastal NC"
                       value={coverageArea}
                       onChange={(e) => setCoverageArea(e.target.value)}
                       className="w-full px-3 py-1.5 bg-white border border-amber-300 rounded-lg text-xs"
@@ -418,7 +540,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   placeholder="name@organization.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 />
               </div>
             </div>
@@ -434,7 +556,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   placeholder="At least 6 characters"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 />
               </div>
             </div>
@@ -458,7 +580,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     onClick={() => setPlan(p.id as any)}
                     className={`p-2 rounded-xl border text-center transition ${
                       plan === p.id
-                        ? 'border-teal-600 bg-teal-50 text-teal-900 font-bold'
+                        ? 'border-blue-600 bg-blue-50 text-blue-900 font-bold'
                         : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
                     }`}
                   >
@@ -473,7 +595,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           {/* Submit button */}
           <div className="pt-3 border-t border-slate-200 flex items-center justify-between gap-3">
             <span className="text-[11px] text-slate-500 flex items-center gap-1">
-              <Database className="w-3.5 h-3.5 text-teal-600" />
+              <Database className="w-3.5 h-3.5 text-blue-600" />
               <span>Persisted to Firestore</span>
             </span>
 
@@ -488,7 +610,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <button
                 type="submit"
                 disabled={loading}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-sm transition disabled:opacity-50"
+                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 shadow-sm transition disabled:opacity-50"
               >
                 {loading ? 'Saving to Database...' : isSignUp ? 'Save SaaS Profile' : 'Sign In'}
               </button>
